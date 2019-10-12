@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.email %></h1>
+    <%= link_to "Activate link", @url , :target => "_blank" %>
+    <p>
+      Sample mail sent using smtp.
+    </p>
+  </body>
+</html>

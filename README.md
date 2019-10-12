@@ -1,24 +1,26 @@
-# README
+# Backend - Robert
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Using**
 
-Things you may want to cover:
+- Ruby
+- Ruby on Rails
+- JWT
+- MySQL
+- Mailer
 
-* Ruby version
+```
+rails serve
+```
 
-* System dependencies
+# Frontend - David
 
-* Configuration
+```
+ng serve
+```
 
-* Database creation
+**Using**
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Angular 8
+- Material UI
+- JWT
+- SASS

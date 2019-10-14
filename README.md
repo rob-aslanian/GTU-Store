@@ -30,9 +30,7 @@ rails serve
 
 # Frontend - David
 
-```
-ng serve
-```
+
 
 **Using**
 
@@ -40,3 +38,7 @@ ng serve
 - Material UI
 - JWT
 - SASS
+
+```
+ng serve
+```

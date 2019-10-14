@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users, param: :id
-  post '/auth/login', to: 'authentication#login'
-  get '/auth/verify/:token', to: 'authentication#verify' , constraints: { token: /.*/ }
+  namespace :api do
+    namespace :v1 do
+      resources :users, param: :id
+      
+      post '/auth/login', to: 'auth#login'
+      get '/auth/verify/:token', to: 'auth#verify' , constraints: { token: /.*/ }
 
-  get '/*a', to: 'application#not_found'
+      post   '/upload/user/:id' , to: 'upload#add_avatar'
+      delete '/upload/user/:id' , to: 'upload#remove_avatar'
+
+      # get '/*a', to: 'application#not_found'
+    end
+  end
 end

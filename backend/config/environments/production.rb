@@ -51,18 +51,16 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "rails-jwt_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "GTU-Store_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :smtp
-    # SMTP settings for gmail
-    config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => '<OUR GMAIL>',
-    :password             => '<OUR GMAIL PASSWORD>',
-    :authentication       => :plain,
-    :enable_starttls_auto => true
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :user_name            => '<OUR GMAIL>',
+      :password             => '<OUR GMAIL PASSWORD>',
+      :authentication       => :plain,
+      :enable_starttls_auto => true
     }
 
   # Ignore bad email addresses and do not raise email delivery errors.

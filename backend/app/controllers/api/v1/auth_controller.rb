@@ -1,4 +1,4 @@
-class AuthenticationController < ApplicationController
+class Api::V1::AuthController < ApplicationController
   skip_before_action  :authenticate_request, only: [:login , :verify]
 
   # POST /auth/login
@@ -10,8 +10,6 @@ class AuthenticationController < ApplicationController
     else
      render json: { error: command.errors }, status: :unauthorized
     end
-
-   
   end
 
   def verify
@@ -32,7 +30,6 @@ class AuthenticationController < ApplicationController
   
      end
   end
-
 
   private
   def login_params

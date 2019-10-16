@@ -1,0 +1,27 @@
+@import 'src/variables';
+
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8dc6cd;
+    .login-container {
+        width: 23.125rem;
+        height: 23.4375rem;
+        background-color: #ffffff;
+        border-radius: 7px;
+        height: 32rem;
+        .login-header {
+            width: 90%;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    }
+    
+}

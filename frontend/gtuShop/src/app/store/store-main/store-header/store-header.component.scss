@@ -1,0 +1,27 @@
+@import 'src/variables';
+
+.store-header {
+    .store-center  {
+         text-align: center;
+         h2{
+             font-size: 2rem;
+             margin: 0px;
+         }
+         p {
+             font-size: .875rem;
+             color: $light-grey;
+             margin: 0px;
+         }
+    }
+    .store-search {
+        input {
+            position: relative;
+            padding-right: 5.3rem;
+        }
+        button {
+            position: absolute;
+            right: 16px;
+            top: 0px;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center flex-wrap">
+  <div class="col-lg-9">
+    <!-- Social Links -->
+    <div class="d-flex justify-content-end">
+      <div class="social-links-container d-flex justify-content-between">
+        <a href="" class="social-links">
+          <img src="assets/img/whatsapp.svg" alt="whatsapp" />
+        </a>
+        <a href="" class="social-links">
+          <img src="assets/img/youtube.svg" alt="youtube" />
+        </a>
+        <a href="" class="social-links">
+          <img src="assets/img/instagram.svg" alt="instagram" />
+        </a>
+        <a href="" class="social-links">
+          <img src="assets/img/facebook.svg" alt="facebook" />
+        </a>
+      </div>
+    </div>
+    <!-- Social Links -->
+  </div>
+
+  <div class="col-xl-9 store-wrap mt-3">
+    <app-store-header></app-store-header>
+
+    <div class="row">
+      <div class="col-xl-3 p-0" >
+          <app-left-navigation></app-left-navigation>
+      </div>
+      <div class="col-xl-9">
+        <app-header-navigation></app-header-navigation>
+          <div class="col-12" style="padding: 0px;">
+                <router-outlet></router-outlet>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

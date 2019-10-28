@@ -1,0 +1,59 @@
+@import 'src/variables';
+
+.categories {
+    padding: 15px;
+    background: $soft-grey;
+    .blue-border {
+       background: $soft-blue;
+       border-radius: 7px;
+       padding-top: .9rem;
+       padding-bottom: .9rem;
+       height: 57px;
+       h4 {
+           color: $white;
+           text-align: initial;
+           margin: 0px;
+       } 
+       .white-box {
+           margin: 0px auto;
+            .white-line {
+                width: 39px;
+                height: 5px;
+                margin-top: 2px;
+                background: #fff;
+            }
+       }
+    }
+    .list {
+        ul {
+          list-style: none;
+          padding: 0px;
+          width: 100%;
+            li {
+                padding: 10px 0px;
+                position: relative;   
+                cursor: pointer;
+                 &::after {
+                    content: ">";
+                    display: block;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    top: 6px;
+                    right: 0px;
+                 }
+                 &:not(:last-child ) {
+                     border-bottom: 1px solid  $light-grey;
+                 } 
+              a {
+                   text-decoration: none;
+                   color: black;
+
+              }
+            }
+        }
+    }
+}
+.active {
+    color: $soft-blue;
+}

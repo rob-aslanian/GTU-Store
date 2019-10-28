@@ -1,0 +1,41 @@
+@import 'src/variables';
+
+.header-navigation {
+    height: 72px;
+    padding-top: 15px;
+    .custom-svg {
+        padding-right: .5rem;
+        color: $white;
+        cursor: pointer;
+    }
+     .navigation {
+        background-color: $dark-brown;
+        margin-left: 15px;
+        height: 100%;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        min-width: 515px;
+         a {
+             color: $white;
+             padding-bottom: 11px;
+             cursor: pointer;
+         }
+         .sub-nav {
+             padding-left: .5rem;
+         }
+     }
+     .shop {
+         background-color: $soft-blue ;
+         border-top-right-radius: 5px;
+         border-bottom-right-radius: 5px;
+          .custon-svg--big {
+            font-size: 1.5rem;
+          }
+           span {
+               color: $white;
+           }
+        .item {
+            height: 100%;
+        }
+     }
+}

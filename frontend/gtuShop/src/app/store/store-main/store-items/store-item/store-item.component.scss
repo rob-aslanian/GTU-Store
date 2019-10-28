@@ -1,0 +1,39 @@
+@import 'src/variables';
+
+.item-box {
+    border: 1px solid $light-grey;
+    border-radius: 5px;
+    .item-box-image {
+       width:  150px;
+       height: 150px;
+       margin: 0px auto;
+        img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+        }
+    }
+    .item-box-price {
+        h5 {
+          color: $soft-blue;
+          font-size: 1.4rem;
+
+        }
+    }
+    .item-text-headline {
+        span {
+          font-size: 1rem;
+
+        }
+    }
+    .item-text-description {
+        p {
+          font-size: .8rem;
+          color: $light-grey;
+        }
+    }
+} 
+.custom-svg {
+    color: $soft-blue;
+    cursor: pointer;
+}

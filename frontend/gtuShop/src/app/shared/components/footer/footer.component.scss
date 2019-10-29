@@ -1,0 +1,43 @@
+@import 'src/variables';
+
+
+.offers-wrapper {
+    background: $dark-brown;
+    height: 266px;
+     .footer-intormation {
+         ul > li {
+             color: $soft-blue;
+             list-style: none;
+             cursor: pointer;
+             padding: 5px 0px;
+             &:hover { text-decoration: underline } ;
+             &:first-child {
+                color: $white;
+                text-decoration: none;
+                font-size: 1.3rem;
+               
+           }
+         }
+     }
+   .subscribe-post {
+       span {
+          padding-bottom: 10px;
+          color: $white;
+          font-size: 1.3rem;
+       }
+       
+   }
+  .contact {
+     border-bottom: 1px solid $light-grey;
+  }
+}
+
+
+.no-border-radius-right {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.no-border-radius-left {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}

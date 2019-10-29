@@ -11,6 +11,8 @@ import { CategoriesComponent } from './store-main/left-navigation/categories/cat
 import { SpecialsComponent } from './store-main/left-navigation/specials/specials.component';
 import { StoreItemsComponent } from './store-main/store-items/store-items.component';
 import { StoreItemComponent } from './store-main/store-items/store-item/store-item.component';
+import { SharedModule } from '../shared/shared.module';
+import { SiteOffersComponent } from './store-main/site-offers/site-offers.component';
  
 
 
@@ -26,12 +28,14 @@ import { StoreItemComponent } from './store-main/store-items/store-item/store-it
     CategoriesComponent,
     SpecialsComponent,
     StoreItemsComponent,
-    StoreItemComponent
+    StoreItemComponent,
+    SiteOffersComponent
   ],
   imports: [
     CommonModule,
     StoreRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ]
 })
 export class StoreModule { }

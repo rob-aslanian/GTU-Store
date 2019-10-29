@@ -43,8 +43,10 @@ rails serve
 
 **Using**
 
-- Angular 8
-- Material UI
+- @Angular 8
+- @Ngb Boostrap
+- @FontAwsome
+- @NGRX
 - JWT
 - SASS
 

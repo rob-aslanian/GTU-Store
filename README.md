@@ -34,7 +34,13 @@ rails serve
 
 //////__________ CATEGORIES __________//////
     GET    /api/v1/categories(.:format)
-    ...Must to do
+
+//////__________ ITEMS __________//////
+    GET    /api/v1/item?from=INT&to=INT(.:format) 
+    GET    /api/v1/item/:id(.:format)
+    POST   /api/v1/item(.:format)
+    DELETE /api/v1/users/:id(.:format)
+    PUT    /api/v1/users/:id(.:format) @@@ MUST IMPROVE @@@
 
 
 ```

@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/{id}
   def show
     puts user_params
-    render json: @user, status: :ok
+    render json: @user, status: :ok 
   end
 
   # POST /users
@@ -20,7 +20,8 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id , email:@user.email)
-    #   EmailtestMailer.sample_email(@user ,  token).deliver_later!
+      url_path =  "http://#{request.host}:#{request.port}/api/v1/auth/verify/#{token}"
+      UserMailer.auth(@user ,  url_path).deliver_later!
       render json: @user, status: :created
     else
       render json: { errors: @user.errors.full_messages },

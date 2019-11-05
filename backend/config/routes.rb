@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, param: :id
+
+      resources :item
       
       post '/auth/login', to: 'auth#login'
       get '/auth/verify/:token', to: 'auth#verify' , constraints: { token: /.*/ }

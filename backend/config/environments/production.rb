@@ -54,13 +54,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "GTU-Store_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => '<OUR GMAIL>',
-      :password             => '<OUR GMAIL PASSWORD>',
-      :authentication       => :plain,
-      :enable_starttls_auto => true
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => 'gtustore1@gmail.com',
+    :password             => 'Gtustore123',
+    :authentication       => :plain,
+    :enable_starttls_auto => true
     }
 
   # Ignore bad email addresses and do not raise email delivery errors.

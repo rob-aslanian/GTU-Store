@@ -11,6 +11,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -37,13 +38,15 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  config.action_mailer.perform_deliveries = true
+
    config.action_mailer.delivery_method = :smtp
     # SMTP settings for gmail
    config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :user_name            => '<OUR GMAIL>',
-      :password             => '<OUR GMAIL PASSWORD>',
+      :user_name            => 'gtustore1@gmail.com',
+      :password             => 'Gtustore123',
       :authentication       => :plain,
       :enable_starttls_auto => true
     }

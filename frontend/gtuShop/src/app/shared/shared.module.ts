@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthorizationService } from './services/authorization.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const components = [
       FooterComponent
@@ -11,10 +14,16 @@ const components = [
     ...components
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    FontAwesomeModule
   ],
   exports: [
-    ...components
+    ...components,
+    FontAwesomeModule
+  ],
+  providers: [
+    AuthorizationService
   ]
 })
 export class SharedModule { }

@@ -3,18 +3,31 @@
         <div class="login">
             <div class="login-container">
               <div class="login-wrapper" style="margin-top:4rem">
+               <form [formGroup]='loginForm' (ngSubmit)='submit()'>
                 <div class="d-flex justify-content-center">
-                    <div class="d-flex justify-content-between login-header mt-1">
-                        <img src="../../../assets/img/login.svg" alt="login">
-                        <p>Login to your account</p>
+                    <div class="d-flex justify-content-between align-items-center login-header mt-1">
+                        <fa-icon [icon]="faSignInAlt" class="custom-svg" style="font-size: 26px;"></fa-icon>
+                        <p class="m-0">Login to your account</p>
                     </div>
                 </div>
                 <div class="login-body mt-3">
                     <div class="col-12 mt-3">
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input type="email" 
+                               class="form-control" 
+                               placeholder="Enter email" 
+                               formControlName="email"
+                               [ngClass]="{'is-invalid': isSubmitted && logCtrls.email.errors }"
+                               autocomplete="email"
+                               >
                     </div>
                     <div class="col-12 mt-3">
-                            <input type="password" class="form-control" placeholder="Enter password">
+                            <input type="password" 
+                                   class="form-control" 
+                                   placeholder="Enter password" 
+                                   formControlName="password"
+                                   [ngClass]="{'is-invalid': isSubmitted && logCtrls.password.errors }"
+                                   autocomplete="current-password"
+                                   >
                     </div>
 
                     <div class="col-12 mt-3">
@@ -30,8 +43,9 @@
                             </button>
                         </div>
                   </div>
-                </div>
-             </div>
+                 </div>
+               </form>
+              </div>
             </div>
         </div>
    </div>

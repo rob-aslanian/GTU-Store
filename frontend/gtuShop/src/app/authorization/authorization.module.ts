@@ -5,7 +5,9 @@ import { AuthorizationRoutingModule } from './authorization-routing.module';
 import { AuthorizationComponent } from './authorization.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,13 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     CommonModule,
-    AuthorizationRoutingModule
+    AuthorizationRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    HttpClientModule,
+    
+      
   ]
 })
 

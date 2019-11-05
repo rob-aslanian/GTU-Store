@@ -6,13 +6,14 @@ import { StoreItemsComponent } from './store-main/store-items/store-items.compon
 
 
 
+
 const routes: Routes = [
 
    { path: '', redirectTo:'store', pathMatch: 'full' },
    { path: 'store', component: StoreMainComponent,
       children: [
-         { path: 'items', component: StoreItemsComponent },
-         { path: '', pathMatch: 'full', redirectTo:'items' }
+         { path: '', pathMatch: 'full', redirectTo:'items' },
+         { path: 'items', component: StoreItemsComponent }
       ]
    }
 

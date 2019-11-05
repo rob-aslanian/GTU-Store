@@ -19,6 +19,12 @@ rails serve
 //////__________ USERS __________//////
     GET    /api/v1/users(.:format)
     POST   /api/v1/users(.:format)
+           BODY: {
+             "first_name": ANY
+             "last_name": ANY
+             "email": NOT_REPEAT
+             "password": MIN_6_LENGTH
+           }
     GET    /api/v1/users/:id(.:format)
     PATCH  /api/v1/users/:id(.:format)
     PUT    /api/v1/users/:id(.:format)

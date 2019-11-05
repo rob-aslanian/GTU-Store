@@ -1,0 +1,33 @@
+@import 'src/variables';
+
+.products {
+    border-radius: 5px;
+    min-height: 500px;
+    border: 1.3px solid $soft-grey;
+    margin-right: -15px;
+
+    .list {
+        border-bottom: inherit;
+        border-radius: inherit;
+        .custom-svg {
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        span {
+            font-size: 1.6rem;
+            font-weight: lighter;
+        }
+    }
+    .add-product-form {
+        border-radius: 5px;
+        border: 1.3px solid $soft-grey;
+        padding: 10px;
+        min-height: 448px;
+        .added-product-image {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+  <div class="d-flex justify-content-center">
+    <div class="col-9">
+        <div class="d-flex justify-content-between">
+             <div class="info d-flex align-items-center">
+                    <h3>Products</h3>
+                    <span class="pl-3">Home / Products</span>
+             </div>
+             <div class="panel d-flex">
+               <div class="panel-btn add">
+                    <fa-icon [icon]="faPlusSquare" class="custom-svg">
+                    </fa-icon>
+                </div>
+                <div class="panel-btn remove ml-3">
+                        <fa-icon [icon]="faTrash" class="custom-svg">
+                        </fa-icon>
+                </div>
+             </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+  

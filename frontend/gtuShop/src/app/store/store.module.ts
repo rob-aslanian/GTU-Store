@@ -13,10 +13,8 @@ import { StoreItemsComponent } from './store-main/store-items/store-items.compon
 import { StoreItemComponent } from './store-main/store-items/store-item/store-item.component';
 import { SharedModule } from '../shared/shared.module';
 import { SiteOffersComponent } from './store-main/site-offers/site-offers.component';
+
  
-
-
-
 
 @NgModule({
   declarations: [
@@ -31,6 +29,7 @@ import { SiteOffersComponent } from './store-main/site-offers/site-offers.compon
     StoreItemComponent,
     SiteOffersComponent
   ],
+  
   imports: [
     CommonModule,
     StoreRoutingModule,

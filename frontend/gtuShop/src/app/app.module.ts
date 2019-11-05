@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { StoreModule } from './store/store.module';
+import { UserPanelModule } from './user-panel/user-panel.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { StoreModule } from './store/store.module';
     BrowserAnimationsModule,
     StoreModule,
     AuthorizationModule,
+    UserPanelModule
  
   ],
   providers: [],

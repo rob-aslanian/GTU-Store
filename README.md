@@ -59,7 +59,7 @@ rails serve
 - @Ngb Boostrap
 - @FontAwsome
 - @NGRX
-- JWT
+- JWT: @auth0/angular-jwt
 - SASS
 
 ```

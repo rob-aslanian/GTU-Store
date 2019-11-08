@@ -9,63 +9,68 @@
      <div class="col-12 pt-3 pb-3" >
 
     <div class="add-product-form">
-        <form autocomplete="off">
+        <form autocomplete="off" [formGroup]='productsForm'>
             <div class="row">
                     <div class="col-4">
 
                         <label for="add">Product Name</label>
-                        <input type="text" class="form-control" id='add' placeholder="Enter product name">
+                        <input type="text" 
+                               class="form-control" 
+                               id='add' 
+                               placeholder="Enter product name" 
+                               formControlName='title'
+                               [ngClass]="{'is-invalid': submitted && proCtrls.title.errors}">
 
                     </div>
                     <div class="col-4">
 
                         <label for="price">Price</label>
-                        <input type="text" class="form-control" id='price' placeholder="Enter price">
+                        <input type="number" 
+                               class="form-control" 
+                               id='price' 
+                               placeholder="Enter price"      
+                               formControlName="price"
+                               [ngClass]="{'is-invalid': submitted && proCtrls.price.errors}">
 
                     </div>
                     <div class="col-4">
 
                         <label for="add">Product Description</label>
-                        <input type="text" class="form-control" id='add' placeholder="Enter description ">
+                        <input type="text" class="form-control" id='add' placeholder="Enter description" formControlName="description">
 
                     </div>
             </div>
             <div class="row pt-3">
                     <div class="col-4">
                         <label for="category" class="label-control">Select Category</label>
-                         <select class="form-control" id='category'>
-                              <option selected disabled>Select One</option>
-                              <option value=""></option>
-                              <option value=""></option>
+                         <select class="form-control" id='category' formControlName="category_id" [ngClass]="{'is-invalid': submitted &&  proCtrls.category_id.errors}">
+                              <option disabled value="">Select One</option>
+                              <option *ngFor='let cat of $categories | async' [value]='cat.id'> {{ cat.name }}</option>
                          </select>
                     </div>
-                    <div class="col-4">
 
-                         <label for="model">Model</label>
-                        <input type="text" class="form-control" id='model' placeholder="Enter Model">
-
-                    </div>
-                    <div class="col-4">
-
-                        <label for="details">Additional Details</label>
-                        <input type="text" class="form-control" id='details' placeholder="Enter Additional Details">
-
-                </div>
            </div>
         </form>
-        <button class="btn btn-info mt-3">Upload</button>
-        <div class="row  added-product-image">
-            <div class="col-4">
-                        <img src="assets/img/pc.png" alt="image">
-            </div>
-            <div class="col-4">
-                        <img src="assets/img/pc.png" alt="image">
-            </div>
-            <div class="col-4">
-                        <img src="assets/img/pc.png" alt="image">
-            </div>
+        <div class="col-12 mt-3 pl-0">
+                <input type="file" id="file" (change)='uploadFiles($event)'/>
+                <label for="file" >choose a file</label>        
         </div>
-     
+
+        <div class="row  added-product-image">
+
+            <div class="col-4" *ngFor='let image of images; index as i'>
+                        <img [src]="image.fileForView" alt="image">
+                        <a (click)='removeImage(i)'>X</a>
+            </div>
+
+ 
+
+        </div>
+       <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" (click)='addProducts()'>
+              Save
+          </button>
+     </div>
      </div>
   </div>
 

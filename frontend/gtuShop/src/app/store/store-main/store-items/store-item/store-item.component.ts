@@ -5,6 +5,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { StoreService } from 'src/app/store/service/store.service';
 //Svg
 
 
@@ -21,10 +22,14 @@ export class StoreItemComponent implements OnInit {
   faHeart = faHeart;
   faEye = faEye;
   faArrowAltCircleRight = faArrowAltCircleRight;
-  
-  constructor() { }
+  products: any[];
+
+  constructor(
+    private storeService: StoreService
+  ) { }
 
   ngOnInit() {
+    this.storeService.getProducts().subscribe( ({ data }) => this.products = data )
   }
 
 }

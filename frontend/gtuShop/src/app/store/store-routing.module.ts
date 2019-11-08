@@ -13,7 +13,8 @@ const routes: Routes = [
    { path: 'store', component: StoreMainComponent,
       children: [
          { path: '', pathMatch: 'full', redirectTo:'items' },
-         { path: 'items', component: StoreItemsComponent }
+         { path: 'items', component: StoreItemsComponent },
+         { path: 'items/:category', component: StoreItemsComponent }
       ]
    }
 

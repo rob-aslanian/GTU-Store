@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from 'src/app/store/service/store.service';
 
 @Component({
   selector: 'app-specials',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpecialsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storeService: StoreService
+  ) { }
 
   ngOnInit() {
+    this.storeService.getAllUsers().subscribe( data => console.log( data )  )  
   }
 
 }

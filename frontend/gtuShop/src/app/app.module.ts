@@ -8,6 +8,14 @@ import { AuthorizationModule } from './authorization/authorization.module';
 import { StoreModule } from './store/store.module';
 import { UserPanelModule } from './user-panel/user-panel.module';
 
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+
+export function jwtTokenGetter() {
+  return  localStorage.getItem("access_token")
+}
+
+  
 
 @NgModule({
   declarations: [
@@ -19,7 +27,15 @@ import { UserPanelModule } from './user-panel/user-panel.module';
     BrowserAnimationsModule,
     StoreModule,
     AuthorizationModule,
-    UserPanelModule
+    UserPanelModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+       config: {
+           tokenGetter: jwtTokenGetter,
+           whitelistedDomains: ['localhost:3000']
+            
+       }
+    })
  
   ],
   providers: [],

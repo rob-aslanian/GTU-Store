@@ -35,6 +35,9 @@
                                 <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
                                 <label class="custom-control-label" for="defaultUnchecked">Remember me </label>
                         </div>
+                        <ng-container *ngIf='err'>
+                            <span class="invalid">Login failed wrong user creditianls </span>
+                        </ng-container>
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-end">

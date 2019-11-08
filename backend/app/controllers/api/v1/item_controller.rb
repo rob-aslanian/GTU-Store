@@ -49,23 +49,27 @@ class Api::V1::ItemController < ApplicationController
     # TODO
     def update
       @item = Item.find_by_id(params[:id])
+      puts params[:images]
 
       if @current_user.id == @item.user_id
-        unless @item.update(item_params)
-          render json: { errors: @item.errors.full_messages },
-                status: :unprocessable_entity
-        end
-        else
+        if @item.update(item_params)
           images = params[:images]
 
-          puts params[:images].nil?
+
           # If has images 
             if !images.nil? and params[:images].is_a?(Array) 
             #iterate through each of the files
             params[:images].each do |file|
                 puts file.methods
-                # @item.images.update(:image => file, :item_id => @item.id )
+                @item.images.create!(:image => file, :item_id => params[:id] )
             end
+        end
+        # unless @item.update(item_params)
+        #   render json: { errors: @item.errors.full_messages },
+        #         status: :unprocessable_entity
+        # end
+        else
+
           end
 
           render json: { data:[]  , status: :not_have_permission } , status: :forbidden
@@ -87,7 +91,7 @@ class Api::V1::ItemController < ApplicationController
 
       private
       def item_params
-        params.permit(:title , :description , :price , :category_id)
+        params.permit(:title , :description , :price , :category_id )
       end
  
 

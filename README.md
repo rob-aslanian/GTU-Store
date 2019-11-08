@@ -44,7 +44,14 @@ rails serve
 //////__________ ITEMS __________//////
     GET    /api/v1/item?from=INT&to=INT(.:format) 
     GET    /api/v1/item/:id(.:format)
-    POST   /api/v1/item(.:format)
+    POST   /api/v1/item(.:format) 
+        [FormData]BODY: {
+             "title": ANY
+             "description": ANY
+             "price": NUMBER
+             "category_id": ID
+             "images[]": BLOB
+           } 
     DELETE /api/v1/item/:id(.:format)
     PUT    /api/v1/item/:id(.:format) @@@ MUST IMPROVE @@@
 
@@ -59,7 +66,7 @@ rails serve
 - @Ngb Boostrap
 - @FontAwsome
 - @NGRX
-- JWT
+- JWT: @auth0/angular-jwt
 - SASS
 
 ```

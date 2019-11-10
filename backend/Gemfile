@@ -19,6 +19,8 @@ gem 'puma', '~> 3.7'
 
 gem 'rack-cors'
 
+gem 'swagger-docs'
+
 gem 'carrierwave'
 
 

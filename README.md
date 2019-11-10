@@ -16,6 +16,11 @@ rails serve
 ### Routes
 
 ```
+
+SWAGGER PATH ------> http://localhost:3000/api
+
+______________________________________________
+
 //////__________ USERS __________//////
     GET    /api/v1/users(.:format)
     POST   /api/v1/users(.:format)

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       post '/auth/login', to: 'auth#login'
       get '/auth/verify/:token', to: 'auth#verify' , constraints: { token: /.*/ }
 
-      post   '/upload/user/:id' , to: 'upload#add_avatar'
-      delete '/upload/user/:id' , to: 'upload#remove_avatar'
+      post   '/upload/user' , to: 'upload#add_avatar'
+      delete '/upload/user' , to: 'upload#remove_avatar'
 
       get '/categories' , to: 'category#getAllCategory'
 

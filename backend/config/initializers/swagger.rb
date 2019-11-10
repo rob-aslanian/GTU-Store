@@ -10,14 +10,13 @@ class Swagger::Docs::Config
       controller_base_path: '',
       api_file_path: 'public/apidocs/',
       base_path: 'http://localhost:3000',
-      clean_directory: true,
+      clean_directory: false,
       :attributes => {
         :info => {
           "title" => "GTU Store",
-          "description" => "This is the bes project , cretaed in GTU !!!",
+          "description" => "This is the best project , cretaed in GTU !!!",
           "termsOfServiceUrl" => "https://gtushop.nl",
           "contact" => "robert.aslaniani@gmail.com",
-          "license" => "Apache 2.0",
         }
       }
     }

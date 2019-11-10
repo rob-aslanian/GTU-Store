@@ -88,11 +88,11 @@ class Api::V1::ItemController < ApplicationController
     swagger_api :create do
       summary "Create new item"
       notes "Create a new item , using FORMDATA"
-      param :form, "item[title]", :string, :optional, "Title"
-      param :form, "item[description]", :string, :optional, "Description"
-      param :form, "item[price]", :integer, :optional, "Price"
-      param :form, "item[category_id]", :integer, :optional, "Category id"
-      param :form, "item[images[]]", :array, :optional, "Images"
+      param :form, "title", :string, :optional, "Title"
+      param :form, "description", :string, :optional, "Description"
+      param :form, "price", :integer, :optional, "Price"
+      param :form, "category_id", :integer, :optional, "Category id"
+      param :form, "images[]", :array, :optional, "Images"
 
       response :unauthorized
       response :not_acceptable

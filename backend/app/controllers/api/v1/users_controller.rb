@@ -3,16 +3,28 @@ class Api::V1::UsersController < ApplicationController
   before_action :find_user, except: %i[create index]
 
 
+  swagger_controller :users , "Users"
   # GET /users
   def index
     @users = User.select("id , avatar , first_name, last_name , email , created_at ")
     render json: @users, status: :ok
+  end
+  swagger_api :index do
+    summary "Get All users"
+
+    response :ok
   end
 
   # GET /users/{id}
   def show
     puts user_params
     render json: @user, status: :ok 
+  end
+  swagger_api :show do
+    summary "Get User By id"
+    param :path , :id , :integer , :required , 'User id'
+
+    response :ok
   end
 
   # POST /users
@@ -28,6 +40,17 @@ class Api::V1::UsersController < ApplicationController
              status: :unprocessable_entity
     end
   end
+  swagger_api :create do
+    summary "Register user"
+    param :form, "first_name", :string, :optional, "First name"
+    param :form, "last_name", :string, :optional, "Last Name"
+    param :form, "email", :email, :required, "Email"
+    param :form, "password", :password, :required, "Password"
+
+    response :created
+    response :unprocessable_entity
+
+  end
 
   # PUT /users/{id}
   def update
@@ -40,6 +63,17 @@ class Api::V1::UsersController < ApplicationController
         render json: { data:[]  , status: :not_have_permission } , status: :forbidden
     end
   end
+  swagger_api :update do
+    summary "Edit user"
+    param :form, "first_name", :string, :optional, "First name"
+    param :form, "last_name", :string, :optional, "Last Name"
+    param :form, "email", :email, :required, "Email"
+    param :form, "password", :password, :required, "Password"
+
+    response :ok
+    response :forbidden
+
+  end
 
   # DELETE /users/{username}
   def destroy
@@ -49,6 +83,14 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { data:[]  , status: :not_have_permission } , status: :forbidden
     end
+  end
+  swagger_api :destroy do
+    summary "Remove user"
+    param :path , :id , :integer , :required , 'User id'
+
+    response :ok
+    response :forbidden
+
   end
 
   private

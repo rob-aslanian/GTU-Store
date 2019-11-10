@@ -1,6 +1,8 @@
 class Api::V1::AuthController < ApplicationController
   skip_before_action  :authenticate_request, only: [:login , :verify]
 
+  swagger_controller :auth, "Auth"
+
   # POST /auth/login
   def login
     command = AuthenticateUser.call(params[:email] , params[:password])
@@ -10,6 +12,16 @@ class Api::V1::AuthController < ApplicationController
     else
      render json: { error: command.errors }, status: :unauthorized
     end
+  end
+
+  swagger_api :login do
+    summary "Get All Items"
+    param :form, :email, :email, :required, "Email"
+    param :form, :password, :string, :required, "Password"
+    
+    response :ok, "Success", :auth_token
+    response :unauthorized
+    response :invalid_credentials
   end
 
   def verify

@@ -4,16 +4,31 @@
   "basePath": "http://localhost:3000",
   "apis": [
     {
+      "path": "/apidocs/api/v1/users.{format}",
+      "description": "Users"
+    },
+    {
       "path": "/apidocs/api/v1/item.{format}",
       "description": "Items"
+    },
+    {
+      "path": "/apidocs/api/v1/auth.{format}",
+      "description": "Auth"
+    },
+    {
+      "path": "/apidocs/api/v1/upload.{format}",
+      "description": "Upload user avatar"
+    },
+    {
+      "path": "/apidocs/api/v1/category.{format}",
+      "description": "Get All Category"
     }
   ],
   "authorizations": null,
   "info": {
     "title": "GTU Store",
-    "description": "This is the bes project , cretaed in GTU !!!",
+    "description": "This is the best project , cretaed in GTU !!!",
     "termsOfServiceUrl": "https://gtushop.nl",
-    "contact": "robert.aslaniani@gmail.com",
-    "license": "Apache 2.0"
+    "contact": "robert.aslaniani@gmail.com"
   }
 }

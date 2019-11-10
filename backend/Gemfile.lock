@@ -144,6 +144,7 @@ DEPENDENCIES
   byebug
   carrierwave
   jwt
+  mail
   mysql2
   puma (~> 3.7)
   rack-cors

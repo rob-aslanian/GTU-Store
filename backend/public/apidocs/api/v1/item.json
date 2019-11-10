@@ -39,7 +39,6 @@
             }
           ],
           "summary": "Get All Items",
-          "notes": "Get All items , by defauls from 0 to 10",
           "responseMessages": [
             {
               "code": 401,
@@ -47,6 +46,7 @@
               "message": "Unauthorized"
             }
           ],
+          "notes": "Get All items , by defauls from 0 to 10",
           "nickname": "Api::V1::Item#index",
           "method": "get"
         }
@@ -66,42 +66,41 @@
             },
             {
               "paramType": "form",
-              "name": "item[title]",
+              "name": "title",
               "type": "string",
               "description": "Title",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "item[description]",
+              "name": "description",
               "type": "string",
               "description": "Description",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "item[price]",
+              "name": "price",
               "type": "integer",
               "description": "Price",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "item[category_id]",
+              "name": "category_id",
               "type": "integer",
               "description": "Category id",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "item[images[]]",
+              "name": "images[]",
               "type": "array",
               "description": "Images",
               "required": false
             }
           ],
           "summary": "Create new item",
-          "notes": "Create a new item , using FORMDATA",
           "responseMessages": [
             {
               "code": 401,
@@ -119,6 +118,7 @@
               "message": "Unprocessable Entity"
             }
           ],
+          "notes": "Create a new item , using FORMDATA",
           "nickname": "Api::V1::Item#create",
           "method": "post"
         }
@@ -145,7 +145,6 @@
             }
           ],
           "summary": "Get Item by ID",
-          "notes": "Return item by id",
           "responseMessages": [
             {
               "code": 401,
@@ -158,6 +157,7 @@
               "message": "Not Found"
             }
           ],
+          "notes": "Return item by id",
           "nickname": "Api::V1::Item#show",
           "method": "get"
         }
@@ -219,7 +219,6 @@
             }
           ],
           "summary": "Update item",
-          "notes": "Update current item , using also FORMDATA",
           "responseMessages": [
             {
               "code": 401,
@@ -237,6 +236,7 @@
               "message": "Unprocessable Entity"
             }
           ],
+          "notes": "Update current item , using also FORMDATA",
           "nickname": "Api::V1::Item#update",
           "method": "patch"
         }
@@ -263,7 +263,6 @@
             }
           ],
           "summary": "Delete item",
-          "notes": "Delete item by id",
           "responseMessages": [
             {
               "code": 401,
@@ -281,6 +280,7 @@
               "message": "Not Have Permission"
             }
           ],
+          "notes": "Delete item by id",
           "nickname": "Api::V1::Item#destroy",
           "method": "delete"
         }
@@ -300,7 +300,6 @@
             }
           ],
           "summary": "Get All User Items",
-          "notes": "Return list of user items",
           "responseMessages": [
             {
               "code": 401,
@@ -313,6 +312,7 @@
               "message": "Not Found"
             }
           ],
+          "notes": "Return list of user items",
           "nickname": "Api::V1::Item#user_items",
           "method": "get"
         }

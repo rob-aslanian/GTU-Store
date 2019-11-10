@@ -7,6 +7,7 @@
 - JWT
 - MySQL
 - Mailer
+- Swagger
 
 ```
 rails serve

@@ -23,6 +23,7 @@ gem 'swagger-docs'
 
 gem 'carrierwave'
 
+gem 'mail'
 
 gem 'jwt'
 # Use ActiveModel has_secure_password

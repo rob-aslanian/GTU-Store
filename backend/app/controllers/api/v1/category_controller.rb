@@ -6,4 +6,6 @@ class Api::V1::CategoryController < ApplicationController
 
         render json: { data: @categories , stattus: :get_all_category } , stattus: :ok
     end
+
+    
 end

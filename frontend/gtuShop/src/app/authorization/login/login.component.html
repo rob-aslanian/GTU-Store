@@ -32,8 +32,9 @@
 
                     <div class="col-12 mt-3">
                         <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                <label class="custom-control-label" for="defaultUnchecked">Remember me </label>
+                            <a [routerLink]="['/register']">Register</a>
+                                <!-- <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <label class="custom-control-label" for="defaultUnchecked">Remember me </label> -->
                         </div>
                         <ng-container *ngIf='err'>
                             <span class="invalid">Login failed wrong user creditianls </span>

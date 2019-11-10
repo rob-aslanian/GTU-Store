@@ -4,7 +4,7 @@ export interface IProduct {
         description?: string
         price?: string
         category_id?: string
-        images?: Blob[]
+        'images[]'?: Blob[]
         
 
         

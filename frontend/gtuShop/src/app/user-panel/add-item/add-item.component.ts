@@ -64,13 +64,16 @@ export class AddItemComponent implements OnInit {
   
     const { title, description, price, category_id } = this.productsForm.controls;
 
+
     let input: IProduct = {
       title: title.value,
       description: description.value,
       price: price.value,
       category_id: category_id.value,
-      images: this.images.map( image => image.BLOB )
+      'images[]': this.images.map(image => image.BLOB)
+
     };
+
 
    const data = this.transformInputToFormData( input );
    
@@ -108,7 +111,16 @@ export class AddItemComponent implements OnInit {
     const formData: FormData = new FormData();
 
     Object.keys(input).map( key => {
-       formData.append( key, input[key])
+       
+
+       if ( key === 'images[]'){
+          input['images[]'].map(image => {
+            formData.append('images[]' , image)
+          })
+       }else {
+        formData.append( key, input[key])
+       }
+ 
     } )
     return formData;
   }

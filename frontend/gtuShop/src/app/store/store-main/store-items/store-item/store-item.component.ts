@@ -6,6 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { StoreService } from 'src/app/store/service/store.service';
+import { DomSanitizer } from '@angular/platform-browser';
 //Svg
 
 
@@ -25,7 +26,8 @@ export class StoreItemComponent implements OnInit {
   products: any[];
 
   constructor(
-    private storeService: StoreService
+    private storeService: StoreService,
+    private sanitarize: DomSanitizer
   ) { }
 
   ngOnInit() {

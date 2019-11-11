@@ -1,0 +1,55 @@
+  
+
+<ng-container *ngIf='loading'>
+<form [formGroup]='itemsForm'>
+    <table class="table table-bordered">
+    
+        <thead>
+          <tr>
+            <th scope="col-3">
+                <div class="custom-checkbox">
+                        <input type="checkbox" id="fruit1" name="fruit-1" value="Apple" (change)='selectAll($event)'>
+                        <label for="fruit1" ></label>
+                </div>
+            </th>
+            <th scope="col">Image</th>
+            <th scope="col"> Product Name</th>
+            <th scope="col"> Price </th>
+            <th scope="col">Product Description</th>
+            <th scope="col">Selected Category </th>
+            <th scope="col">Action </th>
+          </tr>
+        </thead>
+    
+        <tbody>
+      <ng-container  formArrayName='items' *ngFor='let list of itemsForm.get("items").controls; let i = index'>
+            <tr [formGroupName]='i'>
+              <th scope="row">
+                  <div class="custom-checkbox">
+                          <input type="checkbox" [id]="i" name="fruit-1"  formControlName='checkbox'>
+                          <label [for]="i"></label>
+                  </div>
+              </th>
+              <td>Mark</td>
+              <td>{{ list.get('title').value }}</td>
+              <td>{{ list.get('price').value }}</td>
+              <td>{{ list.get('description').value  }}</td>
+              <td>{{ list.get('category_id').value | cat  }}</td>
+              <td (click)='deleteItem( list.get("id").value )'> 
+                <button class="btn btn-primary">
+                  Edit
+              </button> 
+            </td>
+            </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </form>
+</ng-container>
+
+
+
+<ng-container *ngIf='!loading'>
+     <app-spinner></app-spinner>
+
+</ng-container>

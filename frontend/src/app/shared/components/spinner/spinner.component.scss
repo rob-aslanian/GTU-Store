@@ -1,0 +1,19 @@
+.spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+     img {
+         border-radius: 50%;
+         animation: rotation 3s infinite linear;
+     }
+}
+ 
+ @keyframes rotation {
+    from {
+            transform: rotate(0deg);
+    }
+    to {
+            transform: rotate(359deg);
+    }
+}

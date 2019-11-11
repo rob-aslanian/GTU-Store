@@ -16,7 +16,7 @@ class Api::V1::CategoryController < ApplicationController
     
         response :unauthorized
         response :invalid_credentials
-      end
+    end
 
     
 end

@@ -22,6 +22,10 @@
     {
       "path": "/apidocs/api/v1/category.{format}",
       "description": "Get All Category"
+    },
+    {
+      "path": "/apidocs/api/v1/image.{format}",
+      "description": "Images"
     }
   ],
   "authorizations": null,

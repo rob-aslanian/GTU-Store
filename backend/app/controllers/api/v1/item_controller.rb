@@ -7,11 +7,14 @@ class Api::V1::ItemController < ApplicationController
     # GET __ get all items
     def index 
       @items = Item.order(created_at: :desc)
-                   .where(category_id:@category_id)
                    .limit(@to)
                    .offset(@from)
 
       
+      unless @category_id.nil? 
+        @items = @items.where(category_id:@category_id) 
+      end
+
       render json: { data: @items } , :include => {:images => {:only => :image }}
     end
 
@@ -168,6 +171,7 @@ class Api::V1::ItemController < ApplicationController
     def pagination_params
         @from ||= params[:from] || 0
         @to ||= params[:to] || 10
-        @category_id ||= params[:category_id] || 1
+        @category_id ||= params[:category_id] || nil
     end
 end
+

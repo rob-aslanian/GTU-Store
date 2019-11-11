@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
       get '/categories' , to: 'category#getAllCategory'
 
+      delete '/image/:id' , to: 'image#destroy'
+
       # get '/*a', to: 'application#not_found'
     end
   end

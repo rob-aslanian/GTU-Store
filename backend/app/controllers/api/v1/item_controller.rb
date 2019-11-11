@@ -174,3 +174,4 @@ class Api::V1::ItemController < ApplicationController
         @category_id ||= params[:category_id] || nil
     end
 end
+

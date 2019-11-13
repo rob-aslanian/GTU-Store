@@ -10,7 +10,7 @@ import { UserPanelModule } from './user-panel/user-panel.module';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreItemDetailedComponent } from './store-main/store-item-detailed/store-item-detailed.component';
+
 
 export function jwtTokenGetter() {
   return  localStorage.getItem("access_token")
@@ -20,8 +20,7 @@ export function jwtTokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    StoreItemDetailedComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

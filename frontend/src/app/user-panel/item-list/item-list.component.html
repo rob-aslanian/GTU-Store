@@ -22,7 +22,7 @@
         </thead>
     
         <tbody>
-      <ng-container  formArrayName='items' *ngFor='let list of itemsForm.get("items").controls; let i = index'>
+      <ng-container  formArrayName='items' *ngFor='let list of itemsForm.get("items")["controls"]; let i = index'>
             <tr [formGroupName]='i'>
               <th scope="row">
                   <div class="custom-checkbox">

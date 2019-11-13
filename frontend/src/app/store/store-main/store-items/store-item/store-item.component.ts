@@ -33,6 +33,8 @@ export class StoreItemComponent implements OnInit {
     this.storeService.getProducts().subscribe( ({ data }) => {
       this.products = data
       this.loading  = true;
+      console.log(data);
+      
     } )
   }
 

@@ -1,5 +1,5 @@
-import { environmment as defaultEnvironment } from './environment.defaults';
-
 export const environment = {
-    ...defaultEnvironment,
-}
+    production: false,
+    environmentName: 'QA',
+    apiUrl: 'http://localhost:3000'
+  };

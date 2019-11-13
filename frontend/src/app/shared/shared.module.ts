@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CatPipe } from './pipes/cat.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const components = [
 
@@ -18,6 +19,7 @@ const components = [
 @NgModule({
   declarations: [
     ...components,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,

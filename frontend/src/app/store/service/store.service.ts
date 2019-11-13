@@ -29,7 +29,7 @@ export class StoreService {
     return this.http.post( `${this.endPointh}/item`, products )
   }
 
-  getProducts(from = 1, to = 10): Observable<any> {
+  getProducts(from = 0, to = 10): Observable<any> {
    return this.http.get( `${this.endPointh}/item?from=${from}&to=${to}` );
   }
 

@@ -32,9 +32,13 @@ export class StoreService {
   getProducts(from = 0, to = 10): Observable<any> {
    return this.http.get( `${this.endPointh}/item?from=${from}&to=${to}` );
   }
-
+  
   deleteProduct( id: string ): Observable<any> {
      return this.http.delete( `${this.endPointh}/item/${id}` );
+  }
+
+  getProduct( id: string ): Observable<any> {
+     return this.http.get( `${this.endPointh}/item/${id}` );
   }
   
 }

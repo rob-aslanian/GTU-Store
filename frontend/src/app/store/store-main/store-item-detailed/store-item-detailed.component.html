@@ -1,1 +1,3 @@
-<p>store-item-detailed works!</p>
+<div *ngIf='( $product | async ) as product '>
+     <app-slider [images]='product.images'></app-slider>
+</div>

@@ -67,8 +67,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "gtuShop:build:production",
-              "proxyConfig": "src/proxy.conf.prod.json"
+              "browserTarget": "gtuShop:build:production"
             }
           }
         },

@@ -29,7 +29,9 @@ export class StoreService {
     return this.http.post( `${this.endPointh}/item`, products )
   }
 
-  getProducts(from = 0, to = 10): Observable<any> {
+  getProducts( category: string, from = 0, to = 10 ): Observable<any> {
+    console.log( category );
+    
    return this.http.get( `${this.endPointh}/item?from=${from}&to=${to}` );
   }
   

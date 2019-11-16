@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :item
+    has_and_belongs_to_many:item
     mount_uploader :avatar, AvatarUploader
     has_secure_password
     validates :email, presence: true, uniqueness: true

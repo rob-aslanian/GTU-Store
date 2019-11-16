@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :create_likes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
@@ -18,6 +19,11 @@ Rails.application.routes.draw do
       get '/categories' , to: 'category#getAllCategory'
 
       delete '/image/:id' , to: 'image#destroy'
+
+      # Reaction 
+      get '/reaction' , to: 'reaction#index'
+      post '/reaction' , to: 'reaction#add_reaction'
+      delete '/reaction/:id' , to: 'reaction#remove_reaction'
 
       # get '/*a', to: 'application#not_found'
     end

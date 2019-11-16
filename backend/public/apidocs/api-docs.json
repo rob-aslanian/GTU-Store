@@ -26,6 +26,10 @@
     {
       "path": "/apidocs/api/v1/image.{format}",
       "description": "Images"
+    },
+    {
+      "path": "/apidocs/api/v1/reaction.{format}",
+      "description": "Reaction (Aka liked Items)"
     }
   ],
   "authorizations": null,

@@ -1,0 +1,18 @@
+<ng-container *ngIf='activatedImage'> 
+    <div class="slider-wrapper">
+
+        <div class="slider-content">
+
+            <span class="arrow arrow-left" (click)='previusImage()' *ngIf='index !== 0'><</span>
+            <img [src]="activatedImage" alt="item">
+            <span class="arrow arrow-right" (click)='nextImage()'   *ngIf='index !== images.length -1 '>></span>
+            <div class="circle d-flex">
+                <a *ngFor='let circle of images; let i = index' 
+                    [ngClass]='{ "selected-cirlce": i ==  index }'
+                    (click)='setImage( i )'> </a>
+            </div>
+
+        </div>
+
+    </div>
+</ng-container>

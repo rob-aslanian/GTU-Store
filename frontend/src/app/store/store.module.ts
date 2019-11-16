@@ -13,6 +13,7 @@ import { StoreItemsComponent } from './store-main/store-items/store-items.compon
 import { StoreItemComponent } from './store-main/store-items/store-item/store-item.component';
 import { SharedModule } from '../shared/shared.module';
 import { SiteOffersComponent } from './store-main/site-offers/site-offers.component';
+import { StoreItemDetailedComponent } from './store-main/store-item-detailed/store-item-detailed.component';
 
  
 
@@ -27,7 +28,8 @@ import { SiteOffersComponent } from './store-main/site-offers/site-offers.compon
     SpecialsComponent,
     StoreItemsComponent,
     StoreItemComponent,
-    SiteOffersComponent
+    SiteOffersComponent,
+    StoreItemDetailedComponent
   ],
   
   imports: [

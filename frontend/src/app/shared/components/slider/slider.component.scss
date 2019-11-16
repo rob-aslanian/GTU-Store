@@ -1,0 +1,33 @@
+@import 'src/variables';
+
+.slider-wrapper {
+    .slider-content {
+        position: relative;
+        img {
+            width: 100%;
+            height: 364px;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+        }
+        .circle {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            a {
+                width: 25px;
+                height: 25px;
+                border: 1px solid $light-grey;
+                border-radius: 50%;
+                margin-right: 9px;
+                cursor: pointer;
+            }
+            .selected-cirlce {
+                background-color: $light-green;
+            }
+        }
+
+    }
+}

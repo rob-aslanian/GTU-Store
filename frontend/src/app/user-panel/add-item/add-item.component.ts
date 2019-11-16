@@ -108,7 +108,16 @@ export class AddItemComponent implements OnInit {
       const formData: FormData = new FormData();
 
       Object.keys(input).map( key => {
-        formData.append( key, input[key])
+        if( key === 'images' ) {
+           if(input[key].length > 0){
+
+             input[key].map( item => {
+                formData.append('images[]', item)
+             } )
+           }
+        } else {
+          formData.append( key, input[key])
+        }
       } )
       return formData;
   };

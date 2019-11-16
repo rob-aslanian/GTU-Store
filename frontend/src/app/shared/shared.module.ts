@@ -6,18 +6,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CatPipe } from './pipes/cat.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 const components = [
 
       FooterComponent,
       CatPipe,
-      SpinnerComponent
+      SpinnerComponent,
+      SliderComponent
       
 ];
 
 @NgModule({
   declarations: [
     ...components,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

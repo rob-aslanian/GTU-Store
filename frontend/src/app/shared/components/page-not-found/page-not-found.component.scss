@@ -1,0 +1,13 @@
+.not-found {
+    img {  height: 100vh; }
+    .not-found-content {
+        
+        position: relative;
+        h1 {
+            position: absolute;
+            top: 94px;
+            left: 13px;
+            font-family: 'long';
+        }
+    }
+}

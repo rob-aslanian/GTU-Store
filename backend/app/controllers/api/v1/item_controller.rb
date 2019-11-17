@@ -14,8 +14,16 @@ class Api::V1::ItemController < ApplicationController
       unless @category_id.nil? 
         @items = @items.where(category_id:@category_id) 
       end
-
-      render json: { data: @items } , :include => {:images => {:only => :image }}
+      @items =  @items.map { |item| 
+        item.as_json.merge(
+          :reactions =>  item.user.count,
+          :image => unless item.images[0].nil? 
+            item.images[0].image_url
+          end
+       )
+     }
+     puts @items[0].as_json
+      render json: { data: @items } 
     end
 
     swagger_api :index do
@@ -34,9 +42,11 @@ class Api::V1::ItemController < ApplicationController
     def show 
       begin
         @item = Item.find(params[:id])
-        render json:{ data: @item } , include: 'images' , status: :ok
+        render json:{ data:
+           @item.as_json.merge(:reactions => @item.user.count)
+        } , include: 'images' , status: :ok
       rescue => exception
-        render json: { data: [] } , status: :not_found
+        render json: { error: exception } , status: :not_found
       ensure
         
       end

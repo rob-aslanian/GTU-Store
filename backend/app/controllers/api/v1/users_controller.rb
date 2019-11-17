@@ -32,7 +32,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id , email:@user.email)
-      url_path =  "http://#{request.host}:#{request.port}/api/v1/auth/verify/#{token}"
+      url_path =  "#{request.base_url}/api/v1/auth/verify/#{token}"
       UserMailer.auth(@user ,  url_path).deliver_later!
       render json: @user, status: :created
     else

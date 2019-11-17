@@ -22,7 +22,6 @@ class Api::V1::ItemController < ApplicationController
           end
        )
      }
-     puts @items[0].as_json
       render json: { data: @items } 
     end
 

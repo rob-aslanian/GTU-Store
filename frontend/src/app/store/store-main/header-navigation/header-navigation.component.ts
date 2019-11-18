@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { AuthorizationService } from 'src/app/shared/services/authorization.service';
 //Svg
 @Component({
   selector: 'app-header-navigation',
@@ -22,9 +23,14 @@ export class HeaderNavigationComponent implements OnInit {
   faCheck  = faCheck;
   faShoppingCart = faShoppingCart ;
 
-  constructor() { }
+  isActiveUser: boolean;
+
+  constructor(
+     private authService: AuthorizationService
+  ) { }
 
   ngOnInit() {
+      this.isActiveUser =  this.authService.checkIfUserisLoggedIn();      
   }
 
 }

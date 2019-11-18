@@ -16,7 +16,9 @@ export class AuthorizationService {
 
   constructor(
      private http: HttpClient
-  ) {  }
+  ) { 
+
+   }
 
   /**
    * 
@@ -55,11 +57,19 @@ export class AuthorizationService {
 
     const decodedToken = helper.decodeToken(token);
 
-
     // Save to Local Storage
     localStorage.setItem( 'access_token', token );
     localStorage.setItem('user', JSON.stringify( decodedToken ) );
     
+  }
+  
+  checkIfUserisLoggedIn() : boolean {
+     return localStorage.length > 0 ? true : false;
+  };
+
+  // Clear local storage
+  logOut( ): void {
+     localStorage.clear();
   }
 
 }

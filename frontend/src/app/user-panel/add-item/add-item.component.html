@@ -66,16 +66,28 @@
  
 
         </div>
-       <div class="d-flex justify-content-end">
+       <div class="d-flex justify-content-end" [ngClass]="{ 'justify-content-between' : editId }">
+
+            <button class="btn btn-primary" 
+                    [routerLink]="['/panel/add-item']" 
+                    routerLinkActive="router-link-active"  
+                    *ngIf='editId'>
+                    Cancel
+            </button>
+
           <button class="btn btn-primary" (click)='addProducts()'>
               Save
           </button>
+
+          
      </div>
      </div>
   </div>
   <div class="col-12">
-    <div class="add-product-form">
-        <app-item-list></app-item-list>
+    <div class="add-product-form" *ngIf='!editId'>
+      
+           <app-item-list></app-item-list>
+
      </div>
   </div>
 </div>

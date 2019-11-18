@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         email: ['', Validators.compose([ Validators.required, Validators.email ])],
         password: ['', Validators.required]
     })
+
   }
 
    get logCtrls() {
@@ -44,6 +45,12 @@ export class LoginComponent implements OnInit {
    }
 
    ngOnInit() {
+
+       // Check if user is already logged in 
+       if( this.authService.checkIfUserisLoggedIn() ) {
+           this.router.navigate(['/store'])
+       }
+   
    }
 
    submit() {

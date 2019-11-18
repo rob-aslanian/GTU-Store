@@ -22,7 +22,7 @@ class Api::V1::ItemController < ApplicationController
           end
        )
      }
-      render json: { data: @items } 
+      render json: { data: @items , items_count: @items.count } 
     end
 
     swagger_api :index do
@@ -41,9 +41,8 @@ class Api::V1::ItemController < ApplicationController
     def show 
       begin
         @item = Item.find(params[:id])
-        render json:{ data:
-           @item.as_json.merge(:reactions => @item.user.count)
-        } , include: 'images' , status: :ok
+        puts @item.images
+        render json:{ data: @item.as_json.merge(:reactions => @item.user.count , :images => @item.images )}  , status: :ok
       rescue => exception
         render json: { error: exception } , status: :not_found
       ensure

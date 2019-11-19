@@ -317,6 +317,50 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "path": "/api/v1/find_item",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "query",
+              "type": "string",
+              "description": "Finding query",
+              "required": true
+            }
+          ],
+          "summary": "Find item by title",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 403,
+              "responseModel": null,
+              "message": "Forbidden"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "notes": "For now , finding only by title",
+          "nickname": "Api::V1::Item#find_item",
+          "method": "post"
+        }
+      ]
     }
   ],
   "authorizations": null

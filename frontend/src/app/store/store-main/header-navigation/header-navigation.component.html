@@ -1,13 +1,13 @@
 <div class="header-navigation mt-2">
-    <div class="row" style="height: 100%;">
-        <div class="col-md-9 navigation">
+    <div class="row ml-0 mr-0" style="height: 100%;">
+        <div class="col-9 navigation">
             <div class="d-flex align-items-center" style="height: 100%;">
-                <div class="sub-nav">
+                <div class="sub-nav" [routerLink]="['/']" >
                     <fa-icon [icon]="faHome" class="custom-svg"></fa-icon>
                     <a >home</a>
                 </div>
 
-                <div class="sub-nav">
+                <div class="sub-nav" [routerLink]="['./wishlist']">
                     <fa-icon [icon]="faStar" class="custom-svg"></fa-icon>
                     <a >Wish List(0)</a>
                 </div>
@@ -17,19 +17,25 @@
                     <a >My account</a>
                 </div>
                 
-                <div class="sub-nav">
+                <div *ngIf='!isActiveUser' class="sub-nav" [routerLink]="['/login']">
                     <fa-icon [icon]="faRocket" class="custom-svg"></fa-icon>
                     <a >Log In</a>
                 </div>
 
-                <div class="sub-nav">
+                <div *ngIf='isActiveUser' class="sub-nav" >
+                    <fa-icon [icon]="faRocket" class="custom-svg"></fa-icon>
+                    <a >Log out</a>
+                </div>
+
+
+                <div class="sub-nav" [routerLink]="['/']">
                     <fa-icon [icon]="faCheck" class="custom-svg"></fa-icon>
                     <a >Checkout</a>
                 </div>
 
             </div>
         </div>
-        <div class="col shop">
+        <div class="col-3 shop">
                 <div class="item d-flex align-items-center">
                     <fa-icon [icon]="faShoppingCart" class="custom-svg custon-svg--big"></fa-icon>
                     <span>0 Item(s)</span>

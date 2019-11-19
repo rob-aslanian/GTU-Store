@@ -8,6 +8,7 @@ import { CatPipe } from './pipes/cat.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 const components = [
 
@@ -21,7 +22,8 @@ const components = [
 @NgModule({
   declarations: [
     ...components,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,

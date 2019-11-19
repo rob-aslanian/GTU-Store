@@ -14,6 +14,9 @@ import { StoreItemComponent } from './store-main/store-items/store-item/store-it
 import { SharedModule } from '../shared/shared.module';
 import { SiteOffersComponent } from './store-main/site-offers/site-offers.component';
 import { StoreItemDetailedComponent } from './store-main/store-item-detailed/store-item-detailed.component';
+import { WishlistComponent } from './store-main/wishlist/wishlist.component';
+import { productResolver } from './reoslver/products.resolver';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
  
 
@@ -29,14 +32,19 @@ import { StoreItemDetailedComponent } from './store-main/store-item-detailed/sto
     StoreItemsComponent,
     StoreItemComponent,
     SiteOffersComponent,
-    StoreItemDetailedComponent
+    StoreItemDetailedComponent,
+    WishlistComponent
   ],
   
   imports: [
     CommonModule,
     StoreRoutingModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+    NgbModule
+  ],
+  providers: [
+    productResolver
   ]
 })
 export class StoreModule { }

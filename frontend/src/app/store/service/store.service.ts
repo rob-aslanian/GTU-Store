@@ -25,16 +25,14 @@ export class StoreService {
      return this.http.get( `${this.endPointh}/users` );
   }
   
-  addProducts( products: FormData ): Observable<any> {
-    return this.http.post( `${this.endPointh}/item`, products )
-  }
 
-  getProducts( category: string, from = 0, to = 10 ): Observable<any> {
-    console.log( category );
-    
-   return this.http.get( `${this.endPointh}/item?from=${from}&to=${to}` );
-  }
-  
+  getProducts( category_id?: string,  from = 0, to = 10 ): Observable<any> {    
+   return category_id ?
+    this.http.get( `${this.endPointh}/item/?from=${from}&to=${to}&category_id=${category_id}` )
+    : this.http.get( `${this.endPointh}/item/?from=${from}&to=${to}` );
+  };
+   
+
   deleteProduct( id: string ): Observable<any> {
      return this.http.delete( `${this.endPointh}/item/${id}` );
   }

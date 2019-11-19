@@ -30,12 +30,12 @@
                           <label [for]="i"></label>
                   </div>
               </th>
-              <td>Mark</td>
+              <td align="center"><img [src]=" list.get('imageUrl').value ? list.get('imageUrl').value : 'assets/img/pc.png'  " alt="image" style="height: 41px; width: 41px;"></td>
               <td>{{ list.get('title').value }}</td>
               <td>{{ list.get('price').value }}</td>
               <td>{{ list.get('description').value  }}</td>
               <td>{{ list.get('category_id').value | cat  }}</td>
-              <td (click)='deleteItem( list.get("id").value )'> 
+              <td (click)='editItem( list.get("id").value )'> 
                 <button class="btn btn-primary">
                   Edit
               </button> 

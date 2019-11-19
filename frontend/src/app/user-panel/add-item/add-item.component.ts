@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 //Svg
 import { faList } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { ICategories } from 'src/app/shared/models/categories.model';
 import { StoreService } from 'src/app/store/service/store.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IProduct } from 'src/app/shared/models/product.model';
+import { IProduct, IProductDetailed } from 'src/app/shared/models/product.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PanelService } from '../service/panel.service';
 
 //Svg
 
@@ -28,19 +30,30 @@ export class AddItemComponent implements OnInit {
   productsForm: FormGroup;
   submitted: boolean = false;
   images: any[] = [];
+  editId: any;
+  imagesDeleteId: any[] = [];
+
 
   constructor(
+
     private storeService: StoreService,
     private fb: FormBuilder,
-    private domSanitize: DomSanitizer
+    private domSanitize: DomSanitizer,
+    private activatedRoute: ActivatedRoute,
+    private panelService: PanelService,
+    private route: Router
+
   ) {
 
    this.productsForm = this.fb.group({
+
                   title: ['', Validators.required],
                   description:[''],
                   price:['', Validators.required],
                   category_id:['', Validators.required]		
+
                 })
+     this.editId =   this.activatedRoute.snapshot.params['id'];
    }
 
   // Get Products ctrls
@@ -54,6 +67,19 @@ export class AddItemComponent implements OnInit {
     this.$categories =  this.storeService.getCategories()
     .pipe( map( ({ data }) => data ) );
 
+   // Case edit    
+    if( this.editId ) {
+        this.storeService.getProduct(
+          this.editId
+        ).subscribe( ({
+          data
+        }) => {
+            if( data ) {
+                 this.parseData( data );
+            }  
+        } )
+    }
+    
   }
 
   addProducts() {
@@ -65,16 +91,43 @@ export class AddItemComponent implements OnInit {
     const { title, description, price, category_id } = this.productsForm.controls;
 
     let input: IProduct = {
-      title: title.value,
-      description: description.value,
-      price: price.value,
-      category_id: category_id.value,
-      images: this.images.map( image => image.BLOB )
+          title: title.value,
+          description: description.value,
+          price: price.value,
+          category_id: category_id.value,
+          images: this.images.map( image => image.BLOB ).filter( image => image )
     };
 
    const data = this.transformInputToFormData( input );
    
-   this.storeService.addProducts(data).subscribe( data => console.log( data ) );
+   // Case add
+   if( !this.editId ) {
+        this.panelService
+        .addProducts(data)
+        .subscribe( data => console.log( data ) );
+   }
+
+   // Edit
+   else if( this.editId ) {
+       this.panelService
+       .updateProduct(
+         data,
+         this.editId
+       )
+       .pipe(
+         switchMap(
+           () => {
+             if( this.imagesDeleteId.length > 0 ) {
+                return this.deleteImagesFromDb();
+             }
+             return of(false);
+           }
+         )
+       )
+       .subscribe( data  => {
+              this.route.navigate(['panel', 'add-item']);
+       })
+   }
    
        
   }
@@ -100,7 +153,12 @@ export class AddItemComponent implements OnInit {
     })
    
   }
+
   removeImage(idx: number) {
+    if( this.images[idx]['id'] ) {
+          this.imagesDeleteId.push( this.images[idx]['id']  ) ;
+          
+    }
     this.images.splice(idx, 1); 
   }
 
@@ -122,4 +180,33 @@ export class AddItemComponent implements OnInit {
       return formData;
   };
 
+  parseData( data: IProductDetailed ) {
+    
+      this.productsForm.patchValue({
+              title: data.title  ,
+              description: data.description , 
+              price: data.price ,
+              category_id: data.category_id ,
+      })
+      if( data.images.length > 0 ) {
+           data.images.map(
+             image => {
+                 this.images.push(
+                   {
+                     fileForView: image.image.url,
+                     id: image.id
+                   }
+                 )
+             }
+           )
+      }
+  }
+
+  deleteImagesFromDb(): Observable<any> {
+      return forkJoin(
+        this.imagesDeleteId.map(
+          id => this.panelService.deleteImage( id )
+        )
+      )
+  }
 }

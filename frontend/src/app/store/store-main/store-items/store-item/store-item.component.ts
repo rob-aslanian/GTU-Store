@@ -25,21 +25,23 @@ export class StoreItemComponent implements OnInit {
   faArrowAltCircleRight = faArrowAltCircleRight;
   products: any[];
   loading: boolean = false;
-  categoryId: string;
-  
+  page: number = 0;
+
   constructor(
-    private storeService: StoreService,
     private activatedRoute: ActivatedRoute
   ) { 
-       this.categoryId = activatedRoute.snapshot.params['category'];
   }
 
   ngOnInit() {    
-    this.storeService.getProducts(this.categoryId).subscribe( ({ data }) => {
-        this.products = data
-        this.loading  = true;      
-    } )
-  }
+   this.loading = false;
+   this.activatedRoute.data.subscribe( 
+      ( { products } ) => {
+         
+           this.loading  = true;  
+           this.products = products['data'];
+      }
+   )
 
 
+ }
 }

@@ -17,8 +17,7 @@
                                placeholder="Enter email" 
                                formControlName="email"
                                [ngClass]="{'is-invalid': isSubmitted && logCtrls.email.errors }"
-                               autocomplete="email"
-                               >
+                               autocomplete="email">
                     </div>
                     <div class="col-12 mt-3">
                             <input type="password" 
@@ -26,8 +25,7 @@
                                    placeholder="Enter password" 
                                    formControlName="password"
                                    [ngClass]="{'is-invalid': isSubmitted && logCtrls.password.errors }"
-                                   autocomplete="current-password"
-                                   >
+                                   autocomplete="current-password">
                     </div>
 
                     <div class="col-12 mt-3">
@@ -35,10 +33,17 @@
                                 <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
                                 <label class="custom-control-label" for="defaultUnchecked">Remember me </label>
                         </div>
+                        
                         <ng-container *ngIf='err'>
                             <span class="invalid">Login failed wrong user creditianls </span>
                         </ng-container>
                     </div>
+                    <div class="col-12 mt-2 mb-2">
+                            <a [routerLink]="['/register']"> 
+                                Don't have account, Register as a new user.
+                        </a>
+                    </div>
+
                     <div class="col-12">
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-primary">

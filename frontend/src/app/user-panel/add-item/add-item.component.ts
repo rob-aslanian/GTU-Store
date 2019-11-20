@@ -104,7 +104,29 @@ export class AddItemComponent implements OnInit {
    if( !this.editId ) {
         this.panelService
         .addProducts(data)
-        .subscribe( data => console.log( data ) );
+        .subscribe( ({ data }) => {
+
+            this.panelService.addProduct.next(
+              {
+                title: title.value,
+                description: description.value,
+                price: price.value,
+                category_id: category_id.value,
+                images: this.images.map(
+                  item => {
+                      return {
+                          image: {
+                            url : item.fileForView
+                          }
+                      }
+                  }
+                ),
+                id: data.id,
+                isSelect: false  
+              }
+            )
+            this.clearAddProduct();
+        });
    }
 
    // Edit
@@ -208,5 +230,13 @@ export class AddItemComponent implements OnInit {
           id => this.panelService.deleteImage( id )
         )
       )
+  }
+
+  clearAddProduct(): void {
+      this.productsForm.reset();
+      this.productsForm.get('category_id').setValue('');
+      this.submitted = false;
+      this.images = [];
+      this.imagesDeleteId = [];
   }
 }

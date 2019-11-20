@@ -1,55 +1,66 @@
   
 
 <ng-container *ngIf='loading'>
-<form [formGroup]='itemsForm'>
-    <table class="table table-bordered">
-    
-        <thead>
-          <tr>
-            <th scope="col-3">
-                <div class="custom-checkbox">
-                        <input type="checkbox" id="fruit1" name="fruit-1" value="Apple" (change)='selectAll($event)'>
-                        <label for="fruit1" ></label>
-                </div>
-            </th>
-            <th scope="col">Image</th>
-            <th scope="col"> Product Name</th>
-            <th scope="col"> Price </th>
-            <th scope="col">Product Description</th>
-            <th scope="col">Selected Category </th>
-            <th scope="col">Action </th>
-          </tr>
-        </thead>
-    
-        <tbody>
-      <ng-container  formArrayName='items' *ngFor='let list of itemsForm.get("items")["controls"]; let i = index'>
-            <tr [formGroupName]='i'>
-              <th scope="row">
+  <form>
+      <table class="table table-bordered">
+      
+          <thead>
+            <tr>
+              <th scope="col-3">
                   <div class="custom-checkbox">
-                          <input type="checkbox" [id]="i" name="fruit-1"  formControlName='checkbox'>
-                          <label [for]="i"></label>
+                          <input type="checkbox" 
+                                 id="fruit1" 
+                                 name="fruit-1" 
+                                 (change)='selectAll($event)'>
+                          <label for="fruit1" ></label>
                   </div>
               </th>
-              <td align="center"><img [src]=" list.get('imageUrl').value ? list.get('imageUrl').value : 'assets/img/pc.png'  " alt="image" style="height: 41px; width: 41px;"></td>
-              <td>{{ list.get('title').value }}</td>
-              <td>{{ list.get('price').value }}</td>
-              <td>{{ list.get('description').value  }}</td>
-              <td>{{ list.get('category_id').value | cat  }}</td>
-              <td (click)='editItem( list.get("id").value )'> 
-                <button class="btn btn-primary">
-                  Edit
-              </button> 
-            </td>
+              <th scope="col">Image</th>
+              <th scope="col"> Product Name</th>
+              <th scope="col"> Price </th>
+              <th scope="col">Product Description</th>
+              <th scope="col">Selected Category </th>
+              <th scope="col">Action </th>
             </tr>
-        </ng-container>
-        </tbody>
-      </table>
-    </form>
-</ng-container>
+          </thead>
+      
+          <tbody>
+        <ng-container *ngFor='let product of userProducts; let i = index'>
+              <tr>
+                <th scope="row">
+                    <div class="custom-checkbox">
+                            <input type="checkbox" 
+                                   [id]="i" 
+                                   name="fruit-1" 
+                                   [(ngModel)]="product.isSelect">
+                            <label [for]="i"></label>
+                    </div>
+                </th>
+                <td align="center"><img [src]=" product.images.length > 0 ? product.images[0].image.url : 'assets/img/pc.png'" 
+                                        alt="image" 
+                                        style="height: 41px; width: 41px;">
+                                      </td> 
 
+                <td>{{  product.title }}</td>
+                <td>{{  product.price }}</td>
+                <td>{{  product.description  }}</td>
+                <td>{{  product.category_id | cat  }}</td>
 
-
-<ng-container *ngIf='!loading'>
-     <app-spinner></app-spinner>
-
-</ng-container>
+                <td (click)='editItem( product.id )'> 
+                  <button class="btn btn-primary">
+                    Edit
+                </button> 
+              </td>
+              </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </form>
+  </ng-container>
+  
+  
+  
+  <ng-container *ngIf='!loading'>
+       <app-spinner></app-spinner>
+  
+  </ng-container>

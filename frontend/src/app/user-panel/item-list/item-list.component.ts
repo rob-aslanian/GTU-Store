@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { StoreService } from 'src/app/store/service/store.service';
 import { FormBuilder, FormGroup, FormArray, Form } from '@angular/forms';
 import { IProductDetailed } from 'src/app/shared/models/product.model';
 import { Router } from '@angular/router';
 import { PanelService } from '../service/panel.service';
-import { Observable, forkJoin } from 'rxjs';
+import {  forkJoin, Observable } from 'rxjs';
 
 
 @Component({
@@ -13,102 +13,109 @@ import { Observable, forkJoin } from 'rxjs';
   styleUrls: ['./item-list.component.scss']
 })
 
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, OnDestroy {
  
 
   loading: boolean = false;
-  itemsForm: FormGroup;
+  userProducts: IProductDetailed[] = [];
 
   @Output() itemToEdit: EventEmitter<IProductDetailed> = new EventEmitter<IProductDetailed>();
 
   constructor(
-      
-      private storeService: StoreService,
-      private fb: FormBuilder,
       private router: Router,
       private panelService: PanelService
 
-  ) { 
-     this.itemsForm = this.fb.group({
-        items: this.fb.array([  ])
-     })
-  }
+  ) {  }
  
  
 
   ngOnInit() {
 
-        this.storeService
-           .getProducts()
+  //Get list user of items
+        this.panelService
+           .getUserProducts()
             .subscribe( ({ data }) => {
-               this.loading = true;
-               console.log(data);
-               
-               this.addItemsInFormArray( data );
+               this.parseData( data );
+               this.loading = true;               
            } );
+
+  // Remove items on subject next 
           this.panelService
                    .deleteItems.subscribe(
                       () => {
-                     const items =  this.itemsForm.get('items').value.map(
-                              ( item, i ) => {
-                                  if( item.checkbox ) {
-                                       return this.panelService.removeProduct( item.id );                                          
-                                  }
-                              }
-                              
-                          ).filter( item => item )
-                          this.removeItems( items )
-                      }
+
+                        this.deleteProductsFromDb().subscribe(
+                           () => this.removeDeletedIProducts()
+                        )
+                     }
+               )
+  // Get added files
+          this.panelService
+                   .addProduct.subscribe(
+                      ( data: IProductDetailed ) => {
+                          if( data  ) {
+                             this.userProducts.unshift( data  )
+                          }
+                      } 
                    )
 
  }
  
-
-
- initilizeItemsArray( item: any ): FormGroup {
  
-   return this.fb.group({
-            category_id: [ item.category_id ],
-            description: [ item.description ],
-            id:          [ item.id ],
-            price:       [ item.price ],
-            title:       [ item.title ],
-            checkbox:    [ false ],
-            imageUrl:   [ item.image ]
-   });
+ parseData( products: IProductDetailed[] ) {
 
- }
-
- addItemsInFormArray( data ): void {
-
-   let products = this.itemsForm.get('items') as FormArray;
-   data.map( item => products.push( this.initilizeItemsArray( item ) ) );
-
+   this.userProducts =  products.map( 
+         (product) => {
+               return {
+                  ...product,
+                  isSelect: false
+               }
+         }
+      );
+   this.loading = true;       
+     
  }
  
- selectAll(e: any) {
-    const selected: boolean = e.target.checked;
-    const items =  this.itemsForm.get('items') as FormArray;
- 
-      
-    items.value.map( (  item , i  ) => {
-         items.at(i).get('checkbox').setValue(selected)
-    });
-
- }
-
+// Edit
  editItem( itemId: string ) {       
       this.router.navigate([ 'panel', 'edit-item', itemId ])
  }
  
- removeItems( items: Observable<any>) {
-    forkJoin( items ).subscribe( data => {
-       let product = this.itemsForm.get('items') as FormArray;
-
-        for (let i = 0; i < product.value.length; i++) {
-            product.removeAt( i );
-        }
-    })
+ // Select all checkbox
+ selectAll( e: any ) {
+    const isChecked = e.target.checked;
+   
+    this.userProducts.map(
+       ( _ ,i ) => {
+            this.userProducts[i].isSelect = isChecked;
+       }
+    )
     
  }
+
+ removeDeletedIProducts() {
+   this.userProducts = this.userProducts.filter( item => !item.isSelect )
+
+ }
+
+ deleteProductsFromDb(  ): Observable<any> {
+
+    const selectedItems = this.userProducts.map( 
+       ( item ) => {
+         if( item.isSelect ) {
+            return this.panelService.removeProduct( item.id )
+         }
+       }
+     ).filter( item => item );
+
+    return forkJoin(
+         selectedItems
+    )
+ }
+ 
+ ngOnDestroy() {
+    this.panelService.deleteItems.complete();
+    this.panelService.addProduct.complete();
+ }
+ 
 }

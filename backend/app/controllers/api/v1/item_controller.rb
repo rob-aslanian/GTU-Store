@@ -66,10 +66,37 @@ class Api::V1::ItemController < ApplicationController
          render json: { data:@item } ,  include: 'images' , status: :ok
       end
     end
-
+    
     swagger_api :user_items do
       summary "Get All User Items"
       notes "Return list of user items"
+      response :unauthorized
+      response :not_found
+    end
+
+    def find_item
+      begin
+        query = params[:query]
+        @items = Item.where("title LIKE ?  OR description LIKE ?" , "%#{query}%" , "%#{query}%")
+        @items =  @items.map { |item| 
+          item.as_json.merge(
+            :reactions =>  item.user.count,
+            :image => unless item.images[0].nil? 
+              item.images[0].image_url
+            end
+         )
+        }
+        render json: { data: @items } , status: :ok
+      rescue => exception
+        render json: { error: exception } , status: :forbidden
+      end
+    end
+
+    swagger_api :find_item do
+      summary "Find item by title"
+      notes "Find item by title and description"
+      param :form, "query", :string, :required, "Finding query"
+      response  :forbidden
       response :unauthorized
       response :not_found
     end

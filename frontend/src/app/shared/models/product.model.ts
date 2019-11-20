@@ -9,9 +9,10 @@ export interface IProduct {
 
 export interface IProductDetailed  extends IProduct {
         
-        created_at:   string
-        id:           number
-        updated_at:   string
-        user_id:      number
+        created_at?:   string
+        id?:           string
+        updated_at?:   string
+        user_id?:      number
+        isSelect?:     boolean
 
 }

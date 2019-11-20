@@ -3,7 +3,7 @@
     <div class="list">
         <div class="col-12 pt-1 pb-1">
             <fa-icon [icon]="faList" class="custom-svg"></fa-icon>
-            <span class="pl-4">Add Product</span>
+            <span class="pl-4">{{ editId  ? 'Edit' : 'Add' }} Product</span>
         </div>
     </div>
      <div class="col-12 pt-3 pb-3" >
@@ -58,7 +58,7 @@
 
         <div class="row  added-product-image">
 
-            <div class="col-4" *ngFor='let image of images; index as i'>
+            <div class="col-4 product-image-container pb-3" *ngFor='let image of images; index as i'>
                         <img [src]="image.fileForView" alt="image">
                         <a (click)='removeImage(i)'>X</a>
             </div>

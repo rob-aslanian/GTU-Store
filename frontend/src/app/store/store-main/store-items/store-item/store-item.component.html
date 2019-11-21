@@ -1,6 +1,6 @@
 <ng-container *ngIf='loading'>
     <div class="row mt-3" >
-        <div class="col-4  mb-3" *ngFor='let item of products ' style="height: 264px;">
+        <div class="col-4  mb-3" *ngFor='let item of products.data ' style="height: 264px;">
             <div class="item-box" style="height: 100%;">
                 <div class="item-box-image" [routerLink]='["/store/item/"+item.id]' style="width: 100%; cursor: pointer;"> 
                     <img [src]="item.image ? item.image  : 'assets/img/pc1.png'" alt="item">
@@ -34,12 +34,16 @@
     </div>
 
      <!-- ngb-pagination -->
-    <div class="d-flex justify-content-end">
-        <ngb-pagination [(page)]="page"
-                        [pageSize]="10"
-                        [collectionSize]="products.length">
-        </ngb-pagination>
-    </div>
+ <ng-container>
+     <div class="d-flex justify-content-end">
+         <ngb-pagination [(page)]="page"
+                         [pageSize]="12"
+                         [collectionSize]="products.items_count"
+                         (pageChange)='onPageChange()'
+                         >
+         </ngb-pagination>
+     </div>
+ </ng-container>
 
 
 </ng-container>

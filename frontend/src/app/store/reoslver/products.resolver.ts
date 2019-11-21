@@ -16,8 +16,8 @@ export class productResolver implements Resolve<any> {
     state: RouterStateSnapshot
   ): Observable<any>|Promise<any>|any {
    const categoryId = route.params['category'];
-   console.log(categoryId);
+
    
-   return  !categoryId || categoryId === '1' ? this.storeService.getProducts() :  this.storeService.getProducts(categoryId)
+   return  this.storeService.getProducts(categoryId);
   }
 }

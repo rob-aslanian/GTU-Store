@@ -14,6 +14,7 @@ export class UserSettingsComponent implements OnInit {
 
   user_info: any = {};
   settingsForm: FormGroup ;
+  submitted: boolean = false;
 
   constructor(
 
@@ -72,8 +73,8 @@ export class UserSettingsComponent implements OnInit {
        )
   }
 
-  saveUser() {
-     
+  editUser() {
+     this.submitted = true;
   }
 
 }

@@ -26,22 +26,40 @@ export class StoreItemComponent implements OnInit {
   products: any[];
   loading: boolean = false;
   page: number = 0;
+  
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute:  ActivatedRoute,
+    private storeService:    StoreService
   ) { 
+
   }
 
   ngOnInit() {    
    this.loading = false;
    this.activatedRoute.data.subscribe( 
       ( { products } ) => {
-         
            this.loading  = true;  
-           this.products = products['data'];
+           this.products = products;
       }
    )
 
+ };
 
+ onPageChange() {
+
+  const categoryId = this.activatedRoute.snapshot.params['category'] 
+
+
+  console.log(categoryId);
+  
+  const from = (this.page * 12 ) - 12 ; 
+
+    this.storeService
+      .getProducts( categoryId, from )
+       .subscribe( data => 
+         this.products =  data
+       );
+       
  }
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IProductDetailed } from 'src/app/shared/models/product.model';
+import { IProductDetailed } from '../../shared/models/product.model';
+ 
+ 
 
 
 
@@ -37,8 +39,20 @@ export class PanelService {
   }
 
   getUserProducts(): Observable<any> {
-    return this.http.get(`${this.endPointh}/user_items`)
+    return this.http.get(`${this.endPointh}/user_items`);
   }
   
+  getUserById(id: string): Observable<any> {
+    return this.http.get(`${this.endPointh}/users/${id}`);
+  }
+  
+  saveUserUploadedImage( image: FormData ): Observable<any> {
+    return this.http.post(`${this.endPointh}/upload/user`, image);
+  }
 
+  removeUserUploadedImage( ): Observable<any> {
+    return this.http.delete(`${this.endPointh}/upload/user`);
+  }
+
+ 
 }

@@ -2,10 +2,11 @@
     <div class="col-9">
         <div class="d-flex justify-content-between">
              <div class="info d-flex align-items-center">
-                    <h3>Products</h3>
-                    <span class="pl-3">Home / Products</span>
+                    <h3>{{ router.url === '/panel/user-settings' ?  'Account settings' : 'Products' }}</h3>
+                    <a class="pl-3" [routerLink]="['./add-item']" routerLinkActive="active">Products </a>
+                    <a [routerLink]="['./user-settings']" routerLinkActive="active" class="pl-3"> Account settings</a>
              </div>
-             <div class="panel d-flex">
+             <div class="panel d-flex" *ngIf="router.url != '/panel/user-settings'">
                <div class="panel-btn add">
                     <fa-icon [icon]="faPlusSquare" class="custom-svg">
                     </fa-icon>

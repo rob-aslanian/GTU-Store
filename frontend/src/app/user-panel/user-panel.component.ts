@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PanelService } from './service/panel.service';
 
 //Svg
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { PanelService } from './service/panel.service';
 //Svg
 @Component({
   selector: 'app-user-panel',
@@ -18,10 +19,12 @@ export class UserPanelComponent implements OnInit {
   faTrash = faTrash;
   
   constructor(
-    private panelService: PanelService
+    private panelService: PanelService,
+    public router: Router
   ) { }
 
   ngOnInit() {
+
   }
   removeItem() {
     this.panelService.deleteItems.next();

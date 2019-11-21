@@ -8,16 +8,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ItemListComponent } from './item-list/item-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
-const components = [
-  UserPanelComponent,
-  AddItemComponent
-];
-
+ 
 @NgModule({
   declarations: [
-    ...components,
-    ItemListComponent
+    UserPanelComponent,
+    AddItemComponent,
+    ItemListComponent,
+    UserSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -27,8 +26,5 @@ const components = [
     FormsModule,
     SharedModule
   ],
-  exports: [
-    ...components
-  ]
 })
 export class UserPanelModule { }

@@ -24,3 +24,11 @@ $red: #c82333;
    }
 
 }
+a {
+   color: $dark-blue;
+}
+.active {
+   color: $light-grey;
+   pointer-events: none;
+   opacity: .6;
+}

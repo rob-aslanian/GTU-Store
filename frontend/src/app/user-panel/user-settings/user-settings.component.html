@@ -1,0 +1,49 @@
+<form [formGroup]="settingsForm">
+    <div class="d-flex justify-content-center">
+        <div class="user-image-wrapper">     
+            <img [src]=" user_info.avatar && user_info.avatar.url ? user_info.avatar.url : 'assets/img/sergi.jpg' " alt="user-image">
+           
+            <ng-container *ngIf=" user_info.avatar && !user_info.avatar.url">
+                <div class="add">
+                     <input type="file"  id="add" class="add-file-input"  (change)='uploadImage($event)'>
+                     <label for="add" class="add-file-label" >+</label>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="user_info.avatar && user_info.avatar.url">
+                <div class="add">
+                      <span (click)='removeUserImage()'>remove</span>
+                </div>
+          </ng-container>
+        </div>
+    </div>
+  
+    <div class="form-group mt-2 user-input-wrapper">
+      <div class="pt-3 pb-3">
+          <div class="col-6 mt-2" style="margin: 0px auto;">
+              <input type="text" 
+                     class="form-control" 
+                     placeholder="Change firstname" 
+                     formControlName="firstName"
+                     [ngClass]="{ 'is-invalid':  useCtrls.firstName.errors }"
+                     >
+          </div>
+          <div class="col-6 mt-2"  style="margin: 0px auto;">
+              <input type="text" 
+                     class="form-control" 
+                     placeholder="Change lastname"  
+                     formControlName="lastName"
+                     [ngClass]="{ 'is-invalid': useCtrls.lastName.errors }"
+                     >
+          </div>    
+          <div class="col-6"      style="margin: 0px auto;">
+              <div class="d-flex justify-content-end mt-2">
+                  <button class="btn btn-primary" (click)='saveUser()'>
+                      Save
+                  </button>
+              </div> 
+          </div>
+      </div>
+    </div>
+
+</form>

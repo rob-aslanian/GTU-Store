@@ -155,6 +155,7 @@ export class AddItemComponent implements OnInit {
   }
 
   uploadFiles(e: any) {
+    
      const target = e.target.files[0];
      
     // Validate if uploaded files is image 

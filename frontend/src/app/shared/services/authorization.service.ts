@@ -72,4 +72,11 @@ export class AuthorizationService {
      localStorage.clear();
   }
 
+  // Get user id 
+
+  getActiveUserId(): string {
+    const parseJson = JSON.parse(localStorage.getItem('user'))
+    return parseJson['user_id'];
+  }
+
 }

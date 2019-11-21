@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191116200147) do
+ActiveRecord::Schema.define(version: 20191121185622) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "alias"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20191116200147) do
     t.bigint "category_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reactions", default: 0, unsigned: true
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end

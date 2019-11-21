@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users/{id}
   def show
-    puts user_params
+
     render json: @user, status: :ok 
   end
   swagger_api :show do
@@ -55,7 +55,7 @@ class Api::V1::UsersController < ApplicationController
   # PUT /users/{id}
   def update
     if @current_user == @user
-      unless @user.update(user_params)
+      unless @user.update(params.permit(:first_name, :last_name, :password))
         render json: { errors: @user.errors.full_messages },
               status: :unprocessable_entity
       end
@@ -67,8 +67,7 @@ class Api::V1::UsersController < ApplicationController
     summary "Edit user"
     param :form, "first_name", :string, :optional, "First name"
     param :form, "last_name", :string, :optional, "Last Name"
-    param :form, "email", :email, :required, "Email"
-    param :form, "password", :password, :required, "Password"
+    param :form, "password", :password, :optional, "Password"
 
     response :ok
     response :forbidden

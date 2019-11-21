@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :item
 
       get '/user_items' , to:'item#user_items'
+      get '/top_items' , to:'item#top_items'
+
       post '/find_item', to: 'item#find_item'
       
       post '/auth/login', to: 'auth#login'

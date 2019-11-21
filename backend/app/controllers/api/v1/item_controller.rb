@@ -1,6 +1,6 @@
 class Api::V1::ItemController < ApplicationController
 
-  before_action :pagination_params , only: [:index]
+   before_action :pagination_params , only: [:index] 
 
    swagger_controller :item, "Items"
 
@@ -16,18 +16,18 @@ class Api::V1::ItemController < ApplicationController
       end
 
       begin
-     
+
         @items =  @items.map { |item| 
             item.as_json.merge(
-              :reactions =>  item.user.count,
               :image => unless item.images[0].nil? 
                 item.images[0].image_url
               end ,
               :has_liked => item.user.ids.first.equal?(@current_user.id)
+             
           )
         }
   
-        render json: { data: @items , items_count: @items.count } 
+        render json: { data: @items , items_count: Item.all.count } 
       rescue => exception 
         render json: { error: exception } , status: :forbidden
       end
@@ -45,6 +45,7 @@ class Api::V1::ItemController < ApplicationController
 
 
 
+
     # GET __ get by id 
     def show 
       begin
@@ -52,7 +53,6 @@ class Api::V1::ItemController < ApplicationController
         puts @item.images
         render json:{ data: 
             @item.as_json.merge(
-                    :reactions => @item.user.count , 
                     :images => @item.images,
                     :has_liked => @item.user.ids.first.equal?(@current_user.id)
             )}  , status: :ok
@@ -72,17 +72,34 @@ class Api::V1::ItemController < ApplicationController
     # GET _ All User Items 
     def user_items 
       unless @current_user.nil?
-         @item = Item.where( user_id: @current_user.id )
+         @item = Item.where( user_id: @current_user.id ).order('created_at DESC')
 
          render json: { data:@item } ,  include: 'images' , status: :ok
       end
     end
-    
+ 
     swagger_api :user_items do
       summary "Get All User Items"
       notes "Return list of user items"
       response :unauthorized
       response :not_found
+    end
+
+
+    def top_items
+      begin
+        @items = Item.order('reactions DESC').limit(5)
+        render json: { data: @items } , status: :ok
+      rescue => exception
+        render json: { error: exception } , status: :forbidden
+      end
+    end
+
+    swagger_api :top_items do
+      summary "Get Top items"
+      notes "Get items , which has more reactions"
+      response :unauthorized
+      response :forbidden
     end
 
     def find_item
@@ -91,7 +108,6 @@ class Api::V1::ItemController < ApplicationController
         @items = Item.where("title LIKE ?  OR description LIKE ?" , "%#{query}%" , "%#{query}%")
         @items =  @items.map { |item| 
           item.as_json.merge(
-            :reactions =>  item.user.count,
             :image => unless item.images[0].nil? 
               item.images[0].image_url
             end,

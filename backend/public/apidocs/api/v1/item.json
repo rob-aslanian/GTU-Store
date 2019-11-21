@@ -319,6 +319,38 @@
       ]
     },
     {
+      "path": "/api/v1/top_items",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],
+          "summary": "Get Top items",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 403,
+              "responseModel": null,
+              "message": "Forbidden"
+            }
+          ],
+          "notes": "Get items , which has more reactions",
+          "nickname": "Api::V1::Item#top_items",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/find_item",
       "operations": [
         {
@@ -356,7 +388,7 @@
               "message": "Not Found"
             }
           ],
-          "notes": "For now , finding only by title",
+          "notes": "Find item by title and description",
           "nickname": "Api::V1::Item#find_item",
           "method": "post"
         }

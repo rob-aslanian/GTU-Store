@@ -16,9 +16,9 @@ class Api::V1::ReactionController < ApplicationController
 
 
     def add_reaction 
-        puts params.permit(:item_id)
         begin
             @item = Item.find(params[:item_id])
+            @item.increment!(:reactions)
             @current_user.item  << @item 
             render status: :ok
         rescue => exception
@@ -38,6 +38,10 @@ class Api::V1::ReactionController < ApplicationController
         begin
             @item = Item.find(params[:id])
             @current_user.item.delete(@item)
+            
+            if  @item.reactions > 0
+                @item.decrement!(:reactions)
+            end
             render status: :ok
         rescue => exception    
             render json:{ error: exception } ,  status: :forbidden

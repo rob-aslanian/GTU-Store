@@ -24,7 +24,8 @@ class ApplicationController < ActionController::API
     private
     def setup_basic_api_documentation
       [:index, :show, :create, :update, :destroy , :user_items , 
-       :add_avatar , :remove_avatar , :add_reaction , :remove_reaction , :find_item].each do |api_action|
+       :add_avatar , :remove_avatar , :add_reaction , :remove_reaction , :find_item,
+       :top_items].each do |api_action|
         swagger_api api_action do
           param :header, 'Authorization', :string, :required, 'Authentication token'
         end

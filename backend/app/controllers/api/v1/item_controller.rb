@@ -14,15 +14,23 @@ class Api::V1::ItemController < ApplicationController
       unless @category_id.nil? 
         @items = @items.where(category_id:@category_id) 
       end
-      @items =  @items.map { |item| 
-        item.as_json.merge(
-          :reactions =>  item.user.count,
-          :image => unless item.images[0].nil? 
-            item.images[0].image_url
-          end
-       )
-     }
-      render json: { data: @items , items_count: @items.count } 
+
+      begin
+     
+        @items =  @items.map { |item| 
+            item.as_json.merge(
+              :reactions =>  item.user.count,
+              :image => unless item.images[0].nil? 
+                item.images[0].image_url
+              end ,
+              :has_liked => item.user.ids.first.equal?(@current_user.id)
+          )
+        }
+  
+        render json: { data: @items , items_count: @items.count } 
+      rescue => exception 
+        render json: { error: exception } , status: :forbidden
+      end
     end
 
     swagger_api :index do
@@ -42,11 +50,14 @@ class Api::V1::ItemController < ApplicationController
       begin
         @item = Item.find(params[:id])
         puts @item.images
-        render json:{ data: @item.as_json.merge(:reactions => @item.user.count , :images => @item.images )}  , status: :ok
+        render json:{ data: 
+            @item.as_json.merge(
+                    :reactions => @item.user.count , 
+                    :images => @item.images,
+                    :has_liked => @item.user.ids.first.equal?(@current_user.id)
+            )}  , status: :ok
       rescue => exception
         render json: { error: exception } , status: :not_found
-      ensure
-        
       end
     end
 
@@ -83,7 +94,8 @@ class Api::V1::ItemController < ApplicationController
             :reactions =>  item.user.count,
             :image => unless item.images[0].nil? 
               item.images[0].image_url
-            end
+            end,
+            :has_liked => item.user.ids.first.equal?(@current_user.id)
          )
         }
         render json: { data: @items } , status: :ok
@@ -177,13 +189,18 @@ class Api::V1::ItemController < ApplicationController
 
     # DELETE _ remove item with images
     def destroy 
-      @item = Item.find_by_id(params[:id])
 
-      if @current_user.id == @item.user_id
-          @item.destroy
-          render json: { data: @user , status: :deleted } , status: :ok
-      else
-        render json: { data:[]  , status: :not_have_permission } , status: :forbidden
+      begin
+        @item = Item.find_by_id(params[:id])
+
+        if @current_user.id == @item.user_id
+            @item.destroy
+            render json: { data: @user , status: :deleted } , status: :ok
+        else
+          render json: { data:[]  , status: :not_have_permission } , status: :forbidden
+        end
+      rescue => exception  
+        render json: { error: exception  } , status: :forbidden
       end
     end
 

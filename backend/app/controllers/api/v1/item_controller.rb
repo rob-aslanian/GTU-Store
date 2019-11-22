@@ -1,6 +1,7 @@
 class Api::V1::ItemController < ApplicationController
 
    before_action :pagination_params , only: [:index] 
+  #  before_action :items_serialize , only: [:today_items]
 
    swagger_controller :item, "Items"
 
@@ -10,24 +11,15 @@ class Api::V1::ItemController < ApplicationController
                    .limit(@to)
                    .offset(@from)
 
-      
+      @items_count = Item.all.count
       unless @category_id.nil? 
         @items = @items.where(category_id:@category_id) 
+        @items_count = Item.where(category_id:@category_id).count
       end
 
       begin
-
-        @items =  @items.map { |item| 
-            item.as_json.merge(
-              :image => unless item.images[0].nil? 
-                item.images[0].image_url
-              end ,
-              :has_liked => item.user.ids.first.equal?(@current_user.id)
-             
-          )
-        }
-  
-        render json: { data: @items , items_count: Item.all.count } 
+        @items =  items_serialize
+        render json: { data: @items , items_count: @items_count } 
       rescue => exception 
         render json: { error: exception } , status: :forbidden
       end
@@ -101,19 +93,30 @@ class Api::V1::ItemController < ApplicationController
       response :unauthorized
       response :forbidden
     end
+    
+    def today_items
+      begin
+        @items = Item.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+        @items = items_serialize
+        render json: { data: @items } , status: :ok
+      rescue => exception 
+        render json: { error: exception } , status: :forbidden
+      end   
+    end
+
+    swagger_api :today_items do
+      summary "Get Today posted item"
+      notes "Return items , which posted current date"
+      response :unauthorized
+      response :forbidden
+    end
+    
 
     def find_item
       begin
         query = params[:query]
         @items = Item.where("title LIKE ?  OR description LIKE ?" , "%#{query}%" , "%#{query}%")
-        @items =  @items.map { |item| 
-          item.as_json.merge(
-            :image => unless item.images[0].nil? 
-              item.images[0].image_url
-            end,
-            :has_liked => item.user.ids.first.equal?(@current_user.id)
-         )
-        }
+        @items =  items_serialize
         render json: { data: @items } , status: :ok
       rescue => exception
         render json: { error: exception } , status: :forbidden
@@ -227,6 +230,23 @@ class Api::V1::ItemController < ApplicationController
       response :unauthorized
       response :not_have_permission
       response :forbidden
+    end
+
+
+    private 
+    def items_serialize
+      unless @items.nil?
+        return  @items.map { |item| 
+                item.as_json.merge(
+                  :image => unless item.images[0].nil? 
+                    item.images[0].image_url
+                  end ,
+                  :has_liked => item.user.ids.first.equal?(@current_user.id)
+                
+                )
+              }
+      end
+      return @items
     end
 
     private

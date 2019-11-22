@@ -150,17 +150,10 @@
             },
             {
               "paramType": "form",
-              "name": "email",
-              "type": "email",
-              "description": "Email",
-              "required": true
-            },
-            {
-              "paramType": "form",
               "name": "password",
               "type": "password",
               "description": "Password",
-              "required": true
+              "required": false
             }
           ],
           "summary": "Edit user",

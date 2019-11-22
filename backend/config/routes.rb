@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
       get '/user_items' , to:'item#user_items'
       get '/top_items' , to:'item#top_items'
+      get '/today_items' , to:'item#today_items'
+
 
       post '/find_item', to: 'item#find_item'
       

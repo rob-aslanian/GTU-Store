@@ -351,6 +351,38 @@
       ]
     },
     {
+      "path": "/api/v1/today_items",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],
+          "summary": "Get Today posted item",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 403,
+              "responseModel": null,
+              "message": "Forbidden"
+            }
+          ],
+          "notes": "Return items , which posted current date",
+          "nickname": "Api::V1::Item#today_items",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/find_item",
       "operations": [
         {

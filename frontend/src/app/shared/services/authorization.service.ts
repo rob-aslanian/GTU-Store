@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ilogin, Iregister } from '../models/auth.model';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class AuthorizationService {
   endPointh = '/api/v1';
 
   constructor(
-     private http: HttpClient
+     private http: HttpClient,
+     private cookieService: CookieService
   ) { 
 
    }
@@ -57,8 +59,11 @@ export class AuthorizationService {
 
     const decodedToken = helper.decodeToken(token);
 
-    // Save to Local Storage
-    localStorage.setItem( 'access_token', token );
+    // Save to cookies  token 
+
+    this.cookieService.set('access_token', token, decodedToken.exp );
+    // Save user info in localStorage 
+
     localStorage.setItem('user', JSON.stringify( decodedToken ) );
     
   }
@@ -79,4 +84,5 @@ export class AuthorizationService {
     return parseJson['user_id'];
   }
 
+  
 }

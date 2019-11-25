@@ -8,17 +8,24 @@ import { AuthorizationModule } from './authorization/authorization.module';
 import { StoreModule } from './store/store.module';
 import { UserPanelModule } from './user-panel/user-panel.module';
 
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
-
-
-export function jwtTokenGetter() {
-  return  localStorage.getItem("access_token")
+export function jwtOptionsFactory( cookieService: CookieService ) {
+  return {
+    tokenGetter: () =>  cookieService.get('access_token'),
+    whitelistedDomains: [
+           'localhost:3000',
+           'localhost:4200',
+           'https://gtushop.nl'
+    ]
+  }
 }
 
+ 
   
 
 @NgModule({
@@ -34,19 +41,28 @@ export function jwtTokenGetter() {
     HttpClientModule,
     AppRoutingModule,
     JwtModule.forRoot({
-       config: {
-           tokenGetter: jwtTokenGetter,
-           whitelistedDomains: [
-             'localhost:3000',
-             'localhost:4200',
-             'https://gtushop.nl'
-            ]
-            
-       }
+        jwtOptionsProvider: {
+            provide: JWT_OPTIONS,
+            useFactory: jwtOptionsFactory,
+            deps: [ CookieService ]
+        } 
     })
  
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+// config: {
+//   tokenGetter: jwtTokenGetter,
+//   whitelistedDomains: [
+//     'localhost:3000',
+//     'localhost:4200',
+//     'https://gtushop.nl'
+//    ]
+   
+// }

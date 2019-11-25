@@ -75,6 +75,7 @@ ______________________________________________
 - JWT: @auth0/angular-jwt
 - SASS
 
+**For run project to development mode use**
 ```
-ng serve
+npm start
 ```

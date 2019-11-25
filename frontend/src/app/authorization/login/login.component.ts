@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
 
     private fb: FormBuilder,
     private authService: AuthorizationService,
-    private router: Router
+    private router: Router,
+
 
   ) { 
     this.loginForm = this.fb.group({
@@ -67,9 +68,9 @@ export class LoginComponent implements OnInit {
                                             return of( false );
                                             } ) ).subscribe( data => {
                                                 if( data ) {
-                                                    const { auth_token } = data;
-                                                    this.authService.parseJWTToken( auth_token );
-                                                    this.router.navigateByUrl("/store");
+                                                      const { auth_token } = data;
+                                                      this.authService.parseJWTToken( auth_token );
+                                                      this.router.navigateByUrl("/store");
                                                 }   
 
                                             } );

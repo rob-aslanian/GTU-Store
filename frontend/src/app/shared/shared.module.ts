@@ -8,27 +8,27 @@ import { CatPipe } from './pipes/cat.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SliderComponent } from './components/slider/slider.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
+import { FormsModule } from '@angular/forms';
 
 const components = [
-
       FooterComponent,
       CatPipe,
       SpinnerComponent,
-      SliderComponent
-      
+      SliderComponent,
+      ItemListComponent,
+      PageNotFoundComponent  
 ];
 
 @NgModule({
   declarations: [
-    ...components,
-    PageNotFoundComponent,
-    PaginationComponent
+    ...components
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   exports: [
     ...components,

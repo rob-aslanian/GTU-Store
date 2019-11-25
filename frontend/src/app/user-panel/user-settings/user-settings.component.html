@@ -25,17 +25,24 @@
                      class="form-control" 
                      placeholder="Change firstname" 
                      formControlName="firstName"
-                     [ngClass]="{ 'is-invalid': submitted && useCtrls.firstName.errors }"
-                     >
+                     [ngClass]="{ 'is-invalid': submitted && useCtrls.firstName.errors }">
           </div>
           <div class="col-6 mt-2"  style="margin: 0px auto;">
               <input type="text" 
                      class="form-control" 
                      placeholder="Change lastname"  
                      formControlName="lastName"
-                     [ngClass]="{ 'is-invalid': submitted &&  useCtrls.lastName.errors }"
-                     >
+                     [ngClass]="{ 'is-invalid': submitted &&  useCtrls.lastName.errors }">
           </div>    
+
+          <div class="col-6 mt-2"  style="margin: 0px auto;">
+            <input type="password" 
+                   class="form-control" 
+                   placeholder="Change password"  
+                   formControlName="password"
+                   [ngClass]="{ 'is-invalid': submitted &&  useCtrls.password.errors }">
+        </div>  
+
           <div class="col-6"      style="margin: 0px auto;">
               <div class="d-flex justify-content-end mt-2">
                   <button class="btn btn-primary" (click)='editUser()'>

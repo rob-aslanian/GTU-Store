@@ -1,6 +1,6 @@
 <ng-container *ngIf='loading'>
     <div class="row mt-3" >
-        <div class="col-4  mb-3" *ngFor='let item of products.data ' style="height: 264px;">
+        <div class="col-4  mb-3" *ngFor='let item of products.data; let i = index' style="height: 264px;">
             <div class="item-box" style="height: 100%;">
                 <div class="item-box-image" [routerLink]='["/store/item/"+item.id]' style="width: 100%; cursor: pointer;"> 
                     <img [src]="item.image ? item.image  : 'assets/img/pc1.png'" alt="item">
@@ -15,17 +15,24 @@
                     <p *ngIf='item.description'>{{ item.description }}</p>
                 </div>
                 <div class="row pl-2 pb-2">
-                    <div class="col-2">
-                        <fa-icon [icon]="faShoppingCart" class="custom-svg"></fa-icon>
-                    </div>  
+
+                  <!-- Add-favourites -->
+                  <ng-container *ngIf="!item.has_liked && activeUserId !== item.user_id">
+                      <div class="col-2" (click)='addToFavourites( item.id, i )'>
+                          <fa-icon [icon]="faShoppingCart" class="custom-svg"></fa-icon>
+                      </div>  
+                  </ng-container>
+
+                  <!-- Remove-Favourites -->
+                  <ng-container *ngIf="item.has_liked && activeUserId !== item.user_id">
+                        <div class="col-2" (click)='removeFromFavourites( item.id, i )'>
+                            <fa-icon [icon]="faShoppingCart" class="custom-svg"></fa-icon>
+                        </div>  
+                    </ng-container>
+
+
                     <div class="col-2">
                         <fa-icon [icon]="faHeart" class="custom-svg"></fa-icon>
-                    </div>
-                    <div class="col-2">
-                        <fa-icon [icon]="faArrowAltCircleRight" class="custom-svg"></fa-icon>
-                    </div>
-                    <div class="col-2">
-                        <fa-icon [icon]="faEye" class="custom-svg"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -34,7 +41,7 @@
     </div>
 
      <!-- ngb-pagination -->
- <ng-container>
+ <ng-container *ngIf="products.items_count > 12">
      <div class="d-flex justify-content-end">
          <ngb-pagination [(page)]="page"
                          [pageSize]="12"

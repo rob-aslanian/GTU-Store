@@ -25,8 +25,10 @@ export class UserSettingsComponent implements OnInit {
 
   ) {
       this.settingsForm = this.fb.group({
-          firstName: ['', Validators.compose([ Validators.required, Validators.minLength( 4 ) ])],
-          lastName: ['', Validators.compose([ Validators.required, Validators.minLength( 4 ) ])]
+          firstName: ['', Validators.compose([ Validators.maxLength( 10 ), Validators.minLength( 4 ) ])],
+          lastName:  ['', Validators.compose([ Validators.maxLength( 10 ) , Validators.minLength( 4 ) ])],
+          password:  ['', Validators.compose([ Validators.maxLength( 10 ) , Validators.minLength( 4 ) ])],
+          
       })
    }
 
@@ -40,10 +42,6 @@ export class UserSettingsComponent implements OnInit {
        .getUserById( this.authService.getActiveUserId() )
          .subscribe( data => {
                 this.user_info = data[0];
-                this.settingsForm.patchValue({
-                    firstName: this.user_info.first_name,
-                    lastName:  this.user_info.last_name
-                }) 
          } );
 
   }
@@ -75,6 +73,33 @@ export class UserSettingsComponent implements OnInit {
 
   editUser() {
      this.submitted = true;
+     if( !this.settingsForm.valid ) {
+        return ;
+     }
+
+    const formData: FormData = new FormData();
+
+    Object.keys(this.settingsForm.controls).map(
+      ( key ) => {
+
+        let value = this.settingsForm.get(key).value;
+
+        if( value ) {
+           formData.append(key , value )
+        } else {
+          formData.append(key , undefined );
+        }
+
+      }
+    )
+
+    this.panelService
+    .editUser(
+      this.user_info.id,
+      formData
+    )
+     .subscribe()
+
   }
 
 }

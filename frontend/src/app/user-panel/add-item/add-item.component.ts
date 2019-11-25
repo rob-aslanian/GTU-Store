@@ -32,16 +32,16 @@ export class AddItemComponent implements OnInit {
   images: any[] = [];
   editId: any;
   imagesDeleteId: any[] = [];
-
+  addedProducts:  any[] = [];
 
   constructor(
 
-    private storeService: StoreService,
-    private fb: FormBuilder,
-    private domSanitize: DomSanitizer,
-    private activatedRoute: ActivatedRoute,
-    private panelService: PanelService,
-    private route: Router
+      private storeService: StoreService,
+      private fb: FormBuilder,
+      private domSanitize: DomSanitizer,
+      private activatedRoute: ActivatedRoute,
+      private panelService: PanelService,
+      private route: Router
 
   ) {
 
@@ -52,7 +52,8 @@ export class AddItemComponent implements OnInit {
                   price:['', Validators.required],
                   category_id:['', Validators.required]		
 
-                })
+                });
+
      this.editId =   this.activatedRoute.snapshot.params['id'];
    }
 
@@ -63,6 +64,16 @@ export class AddItemComponent implements OnInit {
   }
 
   ngOnInit() {
+   
+    //Get list of user items
+    this.panelService
+    .getUserProducts()
+     .subscribe( ({ data }) => {       
+          this.addedProducts = data;
+          console.log(data, this.addedProducts);
+    } );
+
+
 
     this.$categories =  this.storeService.getCategories()
     .pipe( map( ({ data }) => data ) );
@@ -150,13 +161,11 @@ export class AddItemComponent implements OnInit {
               this.route.navigate(['panel', 'add-item']);
        })
    }
-   
-       
-  }
+}
 
   uploadFiles(e: any) {
     
-     const target = e.target.files[0];
+    const target = e.target.files[0];
      
     // Validate if uploaded files is image 
     if( target && !target.type.startsWith('image')) {

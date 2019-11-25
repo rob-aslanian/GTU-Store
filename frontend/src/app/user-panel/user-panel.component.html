@@ -1,21 +1,14 @@
   <div class="d-flex justify-content-center">
     <div class="col-9">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between pt-2">
              <div class="info d-flex align-items-center">
                     <h3>{{ router.url === '/panel/user-settings' ?  'Account settings' : 'Products' }}</h3>
                     <a class="pl-3" [routerLink]="['./add-item']" routerLinkActive="active">Products </a>
                     <a [routerLink]="['./user-settings']" routerLinkActive="active" class="pl-3"> Account settings</a>
              </div>
-             <div class="panel d-flex" *ngIf="router.url != '/panel/user-settings'">
-               <div class="panel-btn add">
-                    <fa-icon [icon]="faPlusSquare" class="custom-svg">
-                    </fa-icon>
-                </div>
-                <div class="panel-btn remove ml-3" (click)='removeItem()' style="cursor: pointer;">
-                        <fa-icon [icon]="faTrash" class="custom-svg">
-                        </fa-icon>
-                </div>
-             </div>
+             <div class="panel d-flex" >
+                 <button class="btn btn-info" [routerLink]="['/']" style="margin-right: -15px;">Back To Shop</button>
+             </div> 
         </div>
         <router-outlet></router-outlet>
     </div>

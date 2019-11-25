@@ -1,9 +1,0 @@
-{
-    "/api": {
-      "target": "https://gtushop.nl",
-      "secure": false,
-      "pathRewrite": {
-        "^/api": ""
-      }
-    }
-  }

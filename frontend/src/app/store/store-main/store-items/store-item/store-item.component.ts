@@ -7,6 +7,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { StoreService } from 'src/app/store/service/store.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from 'src/app/shared/services/authorization.service';
 //Svg
 
 
@@ -26,24 +27,30 @@ export class StoreItemComponent implements OnInit {
   products: any[];
   loading: boolean = false;
   page: number = 0;
-  
+  activeUserId: string;
 
   constructor(
     private activatedRoute:  ActivatedRoute,
-    private storeService:    StoreService
+    private storeService:    StoreService,
+    private authService:     AuthorizationService
   ) { 
 
   }
 
   ngOnInit() {    
+
    this.loading = false;
+
    this.activatedRoute.data.subscribe( 
       ( { products } ) => {
            this.loading  = true;  
-           this.products = products;
+           this.products = products;           
       }
    )
 
+  this.activeUserId =  this.authService.getActiveUserId();
+ 
+  
  };
 
  onPageChange() {
@@ -61,5 +68,28 @@ export class StoreItemComponent implements OnInit {
          this.products =  data
        );
        
+ }
+
+ addToFavourites( item_id: string, idx: number ) {
+ 
+  const formData: FormData = new FormData();
+
+  formData.append( 'item_id', item_id )
+
+  this.products['data'][idx].has_liked = true;
+
+  return   this.storeService
+              .addToFavourites( formData )
+              .subscribe( )
+ }
+
+ removeFromFavourites( item_id: string, idx: number ) {
+
+  this.products['data'][idx].has_liked = false
+
+  return this.storeService
+           .removeFromFavourites(item_id)
+              .subscribe( );
+
  }
 }

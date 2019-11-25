@@ -1,6 +1,13 @@
   
 
-<ng-container *ngIf='loading'>
+<ng-container *ngIf='!loading'>
+
+  <div class="pt-2 pb-2" *ngIf="canDelete">
+    <button class="btn backgroundless" (click)='deleteItems()' >
+       Delete
+   </button>
+  </div>
+  
   <form>
       <table class="table table-bordered">
       
@@ -20,7 +27,8 @@
               <th scope="col"> Price </th>
               <th scope="col">Product Description</th>
               <th scope="col">Selected Category </th>
-              <th scope="col">Action </th>
+              <th scope="col" *ngIf="!isFavourite">Action </th>
+              <th scope="col" *ngIf="isFavourite">Reactions</th>
             </tr>
           </thead>
       
@@ -31,8 +39,9 @@
                     <div class="custom-checkbox">
                             <input type="checkbox" 
                                    [id]="i" 
-                                   name="fruit-1" 
-                                   [(ngModel)]="product.isSelect">
+                                   name="fruit-1"
+                                   [(ngModel)]="product.isSelect"
+                                   (change)='checkIfItemSeleted(  )'>
                             <label [for]="i"></label>
                     </div>
                 </th>
@@ -46,11 +55,16 @@
                 <td>{{  product.description  }}</td>
                 <td>{{  product.category_id | cat  }}</td>
 
-                <td (click)='editItem( product.id )'> 
-                  <button class="btn btn-primary">
-                    Edit
-                </button> 
+                <td *ngIf="!isFavourite"> 
+                    <button class="btn btn-primary" (click)='editItem( product.id )' >
+                      Edit
+                  </button>        
+               </td>
+
+               <td  *ngIf="isFavourite"> 
+                   {{ data.reactions }}      
               </td>
+
               </tr>
           </ng-container>
           </tbody>
@@ -60,7 +74,6 @@
   
   
   
-  <ng-container *ngIf='!loading'>
+  <ng-container *ngIf='loading'>
        <app-spinner></app-spinner>
-  
   </ng-container>

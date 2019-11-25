@@ -17,7 +17,8 @@ export class AuthorizationService {
 
   constructor(
      private http: HttpClient,
-     private cookieService: CookieService
+     private cookieService: CookieService,
+     private helper: JwtHelperService
   ) { 
 
    }
@@ -55,15 +56,13 @@ export class AuthorizationService {
  * @param token 
  */
   parseJWTToken( token ) {
-    const helper = new JwtHelperService();
+ 
 
-    const decodedToken = helper.decodeToken(token);
+    const decodedToken = this.helper.decodeToken(token);
 
     // Save to cookies  token 
-
     this.cookieService.set('access_token', token, decodedToken.exp );
     // Save user info in localStorage 
-
     localStorage.setItem('user', JSON.stringify( decodedToken ) );
     
   }
@@ -80,8 +79,11 @@ export class AuthorizationService {
   // Get user id 
 
   getActiveUserId(): string {
-    const parseJson = JSON.parse(localStorage.getItem('user'))
-    return parseJson['user_id'];
+ 
+    if( !this.helper.isTokenExpired() ) {
+          const parseJson = JSON.parse(localStorage.getItem('user'))
+          return parseJson['user_id'];
+    }
   }
 
   

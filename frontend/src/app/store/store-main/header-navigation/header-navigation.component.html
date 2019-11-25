@@ -7,11 +7,6 @@
                     <a >home</a>
                 </div>
 
-                <div class="sub-nav" [routerLink]="['./wishlist']">
-                    <fa-icon [icon]="faStar" class="custom-svg"></fa-icon>
-                    <a >Wish List(0)</a>
-                </div>
-
                 <div class="sub-nav" [routerLink]='["/panel"]'>
                     <fa-icon [icon]="faUser" class="custom-svg"></fa-icon>
                     <a >My account</a>
@@ -35,11 +30,13 @@
 
             </div>
         </div>
-        <div class="col-3 shop">
-                <div class="item d-flex align-items-center">
+
+        <div class="col-3 shop" >
+                <div class="item d-flex align-items-center" [routerLink]="['./wishlist']">
                     <fa-icon [icon]="faShoppingCart" class="custom-svg custon-svg--big"></fa-icon>
                     <span>0 Item(s)</span>
                 </div>
          </div>
+
     </div>
 </div>

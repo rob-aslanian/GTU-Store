@@ -6,7 +6,6 @@ import { UserPanelComponent } from './user-panel.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ItemListComponent } from './item-list/item-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 
@@ -15,7 +14,6 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
   declarations: [
     UserPanelComponent,
     AddItemComponent,
-    ItemListComponent,
     UserSettingsComponent
   ],
   imports: [

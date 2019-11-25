@@ -40,5 +40,16 @@ export class StoreService {
   getProduct( id: string ): Observable<any> {
      return this.http.get( `${this.endPointh}/item/${id}` );
   }
+
+  addToFavourites( item_id: FormData ): Observable<any> {
+     return this.http.post(`${this.endPointh}/reaction`, item_id);
+  }
   
+  getFavourites(): Observable<any> {
+     return this.http.get(`${this.endPointh}/reaction`)
+  }
+
+  removeFromFavourites( item_id: any ): Observable<any> {
+     return this.http.delete( `${this.endPointh}/reaction/${item_id}` );
+  }
 }

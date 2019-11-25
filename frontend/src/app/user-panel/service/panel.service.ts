@@ -14,7 +14,6 @@ import { IProductDetailed } from '../../shared/models/product.model';
 export class PanelService {
 
   endPointh = '/api/v1';
-  deleteItems: Subject<any> = new Subject<any>();
   addProduct:    Subject<IProductDetailed> = new Subject<IProductDetailed>();
 
   constructor(
@@ -53,6 +52,9 @@ export class PanelService {
   removeUserUploadedImage( ): Observable<any> {
     return this.http.delete(`${this.endPointh}/upload/user`);
   }
-
+  
+  editUser( id: string, input: FormData ): Observable<any> {
+     return this.http.patch(`${this.endPointh}/users/${id}`, input)
+  }
  
 }

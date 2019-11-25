@@ -3,12 +3,21 @@ class Api::V1::ReactionController < ApplicationController
     swagger_controller :reaction, "Reaction (Aka liked Items)"
 
     def index
-        @test = @current_user.item
-        render json: { data:  @test } , status: :ok
+        @items = @current_user.item
+        @items = @items.map { |item| 
+                    item.as_json.merge(
+                    :image => unless item.images[0].nil? 
+                        item.images[0].image_url
+                    end ,
+                    :has_liked => true
+                    )
+                }
+
+        render json: { data:  @items } , status: :ok
     end
 
     swagger_api :index do
-        summary "Get All liked categories "
+        summary "Get All liked items "
 
         response :unauthorized
         response :invalid_credentials

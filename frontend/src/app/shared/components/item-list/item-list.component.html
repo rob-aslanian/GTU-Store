@@ -3,9 +3,19 @@
 <ng-container *ngIf='!loading'>
 
   <div class="pt-2 pb-2" *ngIf="canDelete">
+    
+  <ng-container *ngIf="!isFavourite">
     <button class="btn backgroundless" (click)='deleteItems()' >
        Delete
    </button>
+  </ng-container>
+
+  <ng-container *ngIf="isFavourite">
+      <button class="btn backgroundless" (click)='removeReactions()' >
+         Remove From Reactions 
+     </button>
+    </ng-container>
+   
   </div>
   
   <form>
@@ -41,16 +51,26 @@
                                    [id]="i" 
                                    name="fruit-1"
                                    [(ngModel)]="product.isSelect"
-                                   (change)='checkIfItemSeleted(  )'>
+                                   (change)='checkIfItemSeleted()'>
                             <label [for]="i"></label>
                     </div>
                 </th>
-                <td align="center"><img [src]=" product.images.length > 0 ? product.images[0].image.url : 'assets/img/pc.png'" 
-                                        alt="image" 
-                                        style="height: 41px; width: 41px;">
-                                      </td> 
+                <td align="center">
+                <ng-container *ngIf="isFavourite">
+                  <img [src]=" product.image ? product.image : 'assets/img/pc.png'" 
+                       alt="image" 
+                       style="height: 41px; width: 41px;">
+                </ng-container>
 
-                <td>{{  product.title }}</td>
+                <ng-container *ngIf="!isFavourite">
+                    <img [src]="product.images.length > 0 ? product.images[0].image.url : 'assets/img/pc.png'" 
+                         alt="image" 
+                         style="height: 41px; width: 41px;">
+                  </ng-container>
+                       
+               </td> 
+
+                <td><a [routerLink]="['/store/item/'+product.id]"  >{{  product.title }}</a></td>
                 <td>{{  product.price }}</td>
                 <td>{{  product.description  }}</td>
                 <td>{{  product.category_id | cat  }}</td>
@@ -62,7 +82,7 @@
                </td>
 
                <td  *ngIf="isFavourite"> 
-                   {{ data.reactions }}      
+                   {{ product.reactions }}      
               </td>
 
               </tr>
@@ -71,9 +91,7 @@
         </table>
       </form>
   </ng-container>
-  
-  
-  
+
   <ng-container *ngIf='loading'>
        <app-spinner></app-spinner>
   </ng-container>

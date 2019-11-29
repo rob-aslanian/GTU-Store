@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/store/service/store.service';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ICategories } from 'src/app/shared/models/categories.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { ICategories } from 'src/app/shared/models/categories.model';
 })
 export class CategoriesComponent implements OnInit {
 
-  $categories: Observable<ICategories>
+  $categories: Observable<ICategories>;
 
   constructor(
      private storeService: StoreService
@@ -19,6 +19,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
 
+    
     this.$categories =  this.storeService.getCategories()
                                                         .pipe( map( ({ data }) => data ) );
 

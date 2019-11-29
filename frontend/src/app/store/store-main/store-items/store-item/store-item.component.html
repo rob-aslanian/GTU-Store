@@ -19,21 +19,16 @@
                   <!-- Add-favourites -->
                   <ng-container *ngIf="!item.has_liked && activeUserId !== item.user_id">
                       <div class="col-2" (click)='addToFavourites( item.id, i )'>
-                          <fa-icon [icon]="faShoppingCart" class="custom-svg"></fa-icon>
+                            <fa-icon [icon]="faHeart" class="custom-svg"></fa-icon>  
                       </div>  
                   </ng-container>
 
                   <!-- Remove-Favourites -->
                   <ng-container *ngIf="item.has_liked && activeUserId !== item.user_id">
                         <div class="col-2" (click)='removeFromFavourites( item.id, i )'>
-                            <fa-icon [icon]="faShoppingCart" class="custom-svg"></fa-icon>
+                                <fa-icon [icon]="faHeart" class="custom-svg" style="opacity:0.3;"></fa-icon>   
                         </div>  
                     </ng-container>
-
-
-                    <div class="col-2">
-                        <fa-icon [icon]="faHeart" class="custom-svg"></fa-icon>
-                    </div>
                 </div>
             </div>
         </div>

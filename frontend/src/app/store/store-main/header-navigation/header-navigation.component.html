@@ -31,10 +31,10 @@
             </div>
         </div>
 
-        <div class="col-3 shop" >
+        <div class="col-3 shop" style="cursor: pointer;">
                 <div class="item d-flex align-items-center" [routerLink]="['./wishlist']">
                     <fa-icon [icon]="faShoppingCart" class="custom-svg custon-svg--big"></fa-icon>
-                    <span>0 Item(s)</span>
+                    <span>{{ addedProductsCount }} Item(s)</span>
                 </div>
          </div>
 

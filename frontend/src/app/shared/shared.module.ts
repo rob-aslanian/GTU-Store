@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SliderComponent } from './components/slider/slider.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 const components = [
       FooterComponent,
@@ -28,7 +29,8 @@ const components = [
     CommonModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     ...components,

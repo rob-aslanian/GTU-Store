@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 
@@ -8,7 +8,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StoreService {
+
   endPointh = '/api/v1';
+
+  /**
+   * increment and decrement products 
+   * 
+   */
+  changesInProducts: Subject<string> = new Subject<string>();
+
+  /**
+   * Search Products from header component
+   */
+
+  searchProductsInput: Subject<string> = new Subject<string>();
+
 
   constructor(
          private http: HttpClient
@@ -52,4 +66,9 @@ export class StoreService {
   removeFromFavourites( item_id: any ): Observable<any> {
      return this.http.delete( `${this.endPointh}/reaction/${item_id}` );
   }
+
+  searchProducts( query: FormData ): Observable<any> {
+   return this.http.post(`${this.endPointh}/find_item`,  query);
+ }
+
 }

@@ -29,7 +29,8 @@ export class ItemListComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
       private router: Router,
-      private panelService: PanelService
+      private panelService: PanelService,
+      private storeService: StoreService
 
   ) {  }
  
@@ -42,6 +43,7 @@ export class ItemListComponent implements OnInit, OnDestroy, OnChanges {
                    .addProduct.subscribe(
                       ( data: IProductDetailed ) => {
                           if( data  ) {
+                             console.log(data);
                              this.userProducts.unshift( data  )
                           }
                       } 
@@ -119,6 +121,27 @@ export class ItemListComponent implements OnInit, OnDestroy, OnChanges {
       () => this.removeDeletedIProducts()
    )
  }
+
+ removeReactions() {
+      this.removeFavouritesFromDb().subscribe(
+         () => this.removeDeletedIProducts()
+      )
+ }
+
+ removeFavouritesFromDb(): Observable<any>  {
+   const selectedItems = this.userProducts.map( 
+      ( item ) => {
+        if( item.isSelect ) {
+           return this.storeService.removeFromFavourites( item.id )
+        }
+      }
+    ).filter( item => item );
+
+   return forkJoin(
+        selectedItems
+   )
+ }
+
 
  ngOnDestroy() {
     this.panelService.addProduct.complete();

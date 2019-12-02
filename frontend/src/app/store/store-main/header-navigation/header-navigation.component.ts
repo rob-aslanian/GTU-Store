@@ -29,17 +29,19 @@ export class HeaderNavigationComponent implements OnInit {
   isActiveUser: boolean;
 
   constructor(
-     private authService: AuthorizationService,
+     private authService:  AuthorizationService,
      private storeService: StoreService
   ) { }
 
   ngOnInit() {
+
       this.isActiveUser =  this.authService.checkIfUserisLoggedIn();   
       
       // Get products Length
+      
       this.storeService
       .getFavourites()
-      .subscribe( ({ data }) => this.addedProductsCount = data.length );
+      .subscribe( ( { data } ) => this.addedProductsCount = data.length );
 
       // Notify changes in Products
 
@@ -49,9 +51,12 @@ export class HeaderNavigationComponent implements OnInit {
           console.log(type);
           
              if( type === 'increment' ) {
+              console.log(this.addedProductsCount);
                  return this.addedProductsCount++;
+           
+                 
              } else {
-
+              console.log(this.addedProductsCount);
                  return this.addedProductsCount--;
 
              }
@@ -60,4 +65,7 @@ export class HeaderNavigationComponent implements OnInit {
 
   }
 
+  logOut() {
+    this.authService.logOut();
+  }
 }

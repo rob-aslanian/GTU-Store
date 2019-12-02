@@ -2,7 +2,7 @@
     <div class="row ml-0 mr-0" style="height: 100%;">
         <div class="col-9 navigation">
             <div class="d-flex align-items-center" style="height: 100%;">
-                <div class="sub-nav" [routerLink]="['/']" >
+                <div class="sub-nav" [routerLink]="['/store']" >
                     <fa-icon [icon]="faHome" class="custom-svg"></fa-icon>
                     <a >home</a>
                 </div>
@@ -17,7 +17,7 @@
                     <a >Log In</a>
                 </div>
 
-                <div *ngIf='isActiveUser' class="sub-nav" >
+                <div *ngIf='isActiveUser' class="sub-nav" (click)='logOut()'>
                     <fa-icon [icon]="faRocket" class="custom-svg"></fa-icon>
                     <a >Log out</a>
                 </div>

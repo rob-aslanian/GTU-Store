@@ -11,7 +11,8 @@ import { UserPanelModule } from './user-panel/user-panel.module';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
+ 
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 export function jwtOptionsFactory( cookieService: CookieService ) {
@@ -46,7 +47,8 @@ export function jwtOptionsFactory( cookieService: CookieService ) {
             useFactory: jwtOptionsFactory,
             deps: [ CookieService ]
         } 
-    })
+    }),
+    // AngularEditorModules
  
   ],
   providers: [
@@ -55,14 +57,3 @@ export function jwtOptionsFactory( cookieService: CookieService ) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-// config: {
-//   tokenGetter: jwtTokenGetter,
-//   whitelistedDomains: [
-//     'localhost:3000',
-//     'localhost:4200',
-//     'https://gtushop.nl'
-//    ]
-   
-// }

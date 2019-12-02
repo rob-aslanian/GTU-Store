@@ -4,6 +4,7 @@ import { Ilogin, Iregister } from '../models/auth.model';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -18,7 +19,8 @@ export class AuthorizationService {
   constructor(
      private http: HttpClient,
      private cookieService: CookieService,
-     private helper: JwtHelperService
+     private helper: JwtHelperService,
+     private router: Router
   ) { 
 
    }
@@ -68,12 +70,13 @@ export class AuthorizationService {
   }
   
   checkIfUserisLoggedIn() : boolean {
-     return localStorage.length > 0 ? true : false;
+    return this.helper.isTokenExpired();
   };
 
-  // Clear local storage
+  // delete token 
   logOut( ): void {
-     localStorage.clear();
+       this.cookieService.delete('access_token', '/');
+       this.router.navigate(['/'])
   }
 
   // Get user id 

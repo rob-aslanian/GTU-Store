@@ -19,7 +19,7 @@ import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 
 
-export class StoreItemComponent implements OnInit, OnDestroy {
+export class StoreItemComponent implements OnInit {
 
   faShoppingCart = faShoppingCart;
   faHeart = faHeart;
@@ -66,6 +66,7 @@ export class StoreItemComponent implements OnInit, OnDestroy {
          return this.storeService.searchProducts( formData )
     } )
   ).subscribe(  ({ data })  => {
+
     this.products.data = data;
     this.products.items_count = 0;
 
@@ -97,7 +98,7 @@ export class StoreItemComponent implements OnInit, OnDestroy {
 
   this.products['data'][idx].has_liked = true;
 
-  this.storeService.changesInProducts.next( 'increment' )
+  this.storeService.changesInProducts.next( 'increment' );
 
 
   return   this.storeService
@@ -121,14 +122,4 @@ export class StoreItemComponent implements OnInit, OnDestroy {
 
  }
 
-  ngOnDestroy() {
-
-    this.storeService
-    .changesInProducts.next();
-
-    this.storeService
-    .changesInProducts.complete();
-
-  }
-
-}
+};

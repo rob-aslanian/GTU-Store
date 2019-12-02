@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/store/service/store.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-specials',
@@ -8,12 +10,17 @@ import { StoreService } from 'src/app/store/service/store.service';
 })
 export class SpecialsComponent implements OnInit {
 
+  $topProducts: Observable<any> ;
+
   constructor(
     private storeService: StoreService
   ) { }
 
   ngOnInit() {
-    this.storeService.getAllUsers().subscribe( data => console.log( data )  )  
+     this.$topProducts  =  this.storeService
+                              .getTopProducts().pipe(
+                                  map(({ data }) => data ) 
+                                );
   }
 
 }

@@ -1,6 +1,6 @@
 <ng-container *ngIf='loading'>
     <div class="row mt-3" >
-        <div class="col-4  mb-3" *ngFor='let item of products.data; let i = index' style="height: 264px;">
+        <div class="col-4  mb-3" *ngFor='let item of products.data; let i = index' style="height: 264px; overflow: hidden;">
             <div class="item-box" style="height: 100%;">
                 <div class="item-box-image" [routerLink]='["/store/item/"+item.id]' style="width: 100%; cursor: pointer;"> 
                     <img [src]="item.image ? item.image  : 'assets/img/pc1.png'" alt="item">
@@ -12,7 +12,7 @@
                     <span *ngIf='item.title'>{{ item.title  }}</span>
                 </div>
                 <div class="item-text-description pl-2">
-                    <p *ngIf='item.description'>{{ item.description }}</p>
+                    <p *ngIf='item.description' [innerHTML]='item.description' ></p>
                 </div>
                 <div class="row pl-2 pb-2">
 

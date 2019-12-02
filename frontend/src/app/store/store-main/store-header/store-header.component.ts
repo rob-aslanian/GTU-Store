@@ -22,6 +22,7 @@ export class StoreHeaderComponent implements OnInit {
 
 
   searchProducts( value: string ) {
+    
       this.storeService
        .searchProductsInput
          .next( value );

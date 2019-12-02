@@ -14,6 +14,7 @@ import { PanelService } from '../service/panel.service';
 
 //Svg
 
+import editorConfig from 'src/app/shared/configs/angular-editor.cnfg';
 
 @Component({
   selector: 'app-add-item',
@@ -33,6 +34,8 @@ export class AddItemComponent implements OnInit {
   editId: any;
   imagesDeleteId: any[] = [];
   addedProducts:  any[] = [];
+
+  editorConfig = editorConfig;
 
   constructor(
 
@@ -94,6 +97,8 @@ export class AddItemComponent implements OnInit {
   }
 
   addProducts() {
+    console.log(this.productsForm.get('description').value);
+    
      this.submitted = true;
      if(!this.productsForm.valid) {
          return;

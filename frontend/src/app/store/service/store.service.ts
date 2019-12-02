@@ -7,6 +7,9 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class StoreService {
 
   endPointh = '/api/v1';
@@ -70,5 +73,13 @@ export class StoreService {
   searchProducts( query: FormData ): Observable<any> {
    return this.http.post(`${this.endPointh}/find_item`,  query);
  }
+
+  getTopProducts(): Observable<any> {
+   return this.http.get(`${this.endPointh}/top_items`);
+  }
+
+  getTodayItems(): Observable<any> {
+   return this.http.get(`${this.endPointh}/today_items`);
+  }
 
 }

@@ -74,6 +74,8 @@ ______________________________________________
 - @NGRX
 - JWT: @auth0/angular-jwt
 - SASS
+- @kolkov/angular-editor
+
 
 **For run project to development mode use**
 ```

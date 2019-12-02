@@ -75,6 +75,8 @@ ______________________________________________
 - JWT: @auth0/angular-jwt
 - SASS
 - @kolkov/angular-editor
+- ngx-cookie-service
+
 
 
 **For run project to development mode use**

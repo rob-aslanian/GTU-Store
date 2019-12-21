@@ -7,12 +7,16 @@ const __connection = mysql.createConnection({
                             database:'gtu_store',
                     });
 
-module.exports = {
-    connect: function(cb) {
-        try{
-           return __connection.connect(cb.bind(__connection));
-        } catch (err){
-            throw new Error(err);
-        }
+__connection.connect(function(err) {
+    if(err){
+        console.log("Error connected to db" , err);
+        throw err;
     }
+
+    console.log("Succesfuly connect to db");
+    
+});
+
+module.exports = {
+    db: __connection,
 }

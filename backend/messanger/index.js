@@ -1,13 +1,10 @@
-const mysql = require('./connection');
+const server = require('./server'),
+      app     = server();
+      
+/// Run server 
+app.listen(3100 , () => {
+    console.log(`Server running !!!`);
+});
 
-mysql.connect(function(error){
-    this.query('SELECT * FROM users' , function(err, result) {
-        if(result instanceof Array) {
-            result.map(user => {
-                console.log(user.id);
 
-            })    
-        }
-    }) 
-    
-})
+

@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
    ngOnInit() {
 
        // Check if user is already logged in 
-       if( this.authService.checkIfUserisLoggedIn() ) {
-           this.router.navigate(['/store'])
+       if( !this.authService.checkIfUserisLoggedIn() ) {
+              this.router.navigate(['/store'])
        }
    
    }

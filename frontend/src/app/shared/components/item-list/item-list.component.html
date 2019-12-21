@@ -72,7 +72,7 @@
 
                 <td><a [routerLink]="['/store/item/'+product.id]"  >{{  product.title }}</a></td>
                 <td>{{  product.price }}</td>
-                <td>{{  product.description  }}</td>
+                <td [innerHTML]='product.description'></td>
                 <td>{{  product.category_id | cat  }}</td>
 
                 <td *ngIf="!isFavourite"> 

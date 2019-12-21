@@ -11,6 +11,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ProductBoxComponent } from './components/product-box/product-box.component';
 
 const components = [
       FooterComponent,
@@ -18,7 +19,8 @@ const components = [
       SpinnerComponent,
       SliderComponent,
       ItemListComponent,
-      PageNotFoundComponent  
+      PageNotFoundComponent,
+      ProductBoxComponent
 ];
 
 @NgModule({

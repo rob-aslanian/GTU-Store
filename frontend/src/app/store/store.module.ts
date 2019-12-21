@@ -16,7 +16,8 @@ import { SiteOffersComponent } from './store-main/site-offers/site-offers.compon
 import { StoreItemDetailedComponent } from './store-main/store-item-detailed/store-item-detailed.component';
 import { WishlistComponent } from './store-main/wishlist/wishlist.component';
 import { productResolver } from './reoslver/products.resolver';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BestSellersComponent } from './store-main/left-navigation/best-sellers/best-sellers.component';
 
  
 
@@ -33,7 +34,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     StoreItemComponent,
     SiteOffersComponent,
     StoreItemDetailedComponent,
-    WishlistComponent
+    WishlistComponent,
+    BestSellersComponent
   ],
   
   imports: [

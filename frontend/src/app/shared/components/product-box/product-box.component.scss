@@ -1,0 +1,23 @@
+@import 'src/variables';
+
+.special-box {
+        
+    img {
+        width:  70px;
+        height: 70px;
+    }
+    .price-fixed {
+        color: $soft-blue;
+    }
+    .price-sale {
+        padding-left: 15px;
+        color: $light-grey;
+        text-decoration: line-through;
+    }
+    p {
+        overflow: hidden;
+        word-break: break-all;
+        max-height: 43px;
+    }
+ 
+  }

@@ -12,7 +12,7 @@ import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
 
-{ path: '', redirectTo:'store', pathMatch: 'full',},
+  
    { path: 'store', component: StoreMainComponent,  canActivateChild: [ AuthGuard ] ,
       children: [
          { path: '', pathMatch: 'full', redirectTo:'items' },

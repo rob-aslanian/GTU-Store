@@ -86,3 +86,10 @@
         top: 2px;
       }
     }}
+
+   :host ::ng-deep  .angular-editor-toolbar-set {
+       &:nth-child(11) {
+            display: none !important; 
+       }
+     
+    }

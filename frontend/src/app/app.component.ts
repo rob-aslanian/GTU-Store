@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-//@ts-ignore
-import { environment } from '@environment'; 
+
+
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,5 @@ import { environment } from '@environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  environment = environment;
+
 }

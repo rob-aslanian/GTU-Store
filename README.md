@@ -71,9 +71,12 @@ ______________________________________________
 - @Angular 8
 - @Ngb Boostrap
 - @FontAwsome
-- @NGRX
 - JWT: @auth0/angular-jwt
 - SASS
+- @kolkov/angular-editor
+- ngx-cookie-service
+
+
 
 **For run project to development mode use**
 ```

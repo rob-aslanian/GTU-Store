@@ -8,6 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 
  
 @NgModule({
@@ -22,6 +24,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
     UserPanelRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    AngularEditorModule,
     SharedModule
   ],
 })

@@ -83,7 +83,7 @@ GEM
     nokogiri (1.10.5-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.3)
     rack (2.0.7)
     rack-cors (1.0.3)
     rack-test (1.1.0)
@@ -146,7 +146,7 @@ DEPENDENCIES
   jwt
   mail
   mysql2
-  puma (~> 3.7)
+  puma (~> 3.12)
   rack-cors
   rails (~> 5.1.7)
   simple_command
